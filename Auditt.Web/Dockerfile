@@ -2,15 +2,11 @@ FROM node:18-alpine as build
 
 WORKDIR /app
 
-# Primero copiar package.json y instalar dependencias
-COPY package*.json ./
-RUN npm install
+# Copiar todos los archivos necesarios
+COPY . .
 
-# Luego copiar el resto del código fuente
-COPY tsconfig*.json ./
-COPY vite.config.ts ./
-COPY public/ ./public/
-COPY src/ ./src/
+# Instalar dependencias
+RUN npm install
 
 # Construir la aplicación
 RUN npm run build
