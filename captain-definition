@@ -1,7 +1,7 @@
 {
     "schemaVersion": 2,
     "dockerfilePath": "./Auditt.Web/Dockerfile",
-    "dockerfileContext": ".",
+    "dockerfileContext": "./Auditt.Web",
     "ports": [
         {
             "port": 80,
