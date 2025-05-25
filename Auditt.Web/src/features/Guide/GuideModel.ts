@@ -3,5 +3,5 @@ export interface GuideModel {
     name: string;
     description: string;    
     idScale: number;
-    questionsCount: number;
+    questionsCount?: number;
 }

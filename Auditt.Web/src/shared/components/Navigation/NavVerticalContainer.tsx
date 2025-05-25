@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { ButtonModel, NavVerticalItemModel } from './Model';
 import NavVertical from './NavVertical';
 

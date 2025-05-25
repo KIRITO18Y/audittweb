@@ -68,10 +68,13 @@ export const Permission = () => {
             ) : (
                 <p className="text-gray-400 font-bold">No hay permisos disponibles.</p>
             )}
+
+            {visibleUpdate && (
             <OffCanvas
                 titlePrincipal="Actualizar el permiso" visible={visible} xClose={handleClose} position={Direction.Right}>
-                {visibleUpdate && <PermisssionUpdate data={visibleUpdate} />}
+               <PermisssionUpdate data={visibleUpdate} />
             </OffCanvas>
+            )}
         </div>
     )
 }

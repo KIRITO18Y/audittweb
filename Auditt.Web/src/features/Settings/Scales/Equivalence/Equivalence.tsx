@@ -57,14 +57,16 @@ export const Equivalence = () => {
                     <p className="text-gray-400">No hay equivalencias disponibles.</p>
                 )}
             </div>
+            {selectedEquivalence && (
             <OffCanvas
                 titlePrincipal="Actualizar la Equivalencia"
                 visible={visible}
                 xClose={handleClose}
                 position={Direction.Right}
             >
-                {selectedEquivalence && <EquivalenceUpdate data={selectedEquivalence} />}
+                <EquivalenceUpdate data={selectedEquivalence} />
             </OffCanvas>
+            )}
         </div>
     );
 };

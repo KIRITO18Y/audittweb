@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import useUserContext from '../shared/context/useUserContext';
 export const Logo = () => {
-    const { business } = useUserContext();
     const navigator = useNavigate();
     const defaultLogo = `${import.meta.env.BASE_URL}initials-logo.svg`;
     
@@ -16,9 +14,7 @@ export const Logo = () => {
         >
             <div className="shrink-0">
                 <img
-                    src={business?.urlLogo 
-                        ? `${import.meta.env.VITE_API_URL}static/logos/${business.urlLogo}` 
-                        : defaultLogo}
+                    src={defaultLogo}
                     alt="logo"
                     className="h-full w-full rounded-lg max-h-[64px] p-1 radius-sm"
                     onError={(e) => {
@@ -28,7 +24,7 @@ export const Logo = () => {
                 />
             </div>
             <div className="shrink-0">
-                <span>{business?.abbreviation || "Empresa"}</span>
+                <span>{"Empresa"}</span>
             </div>
         </div>
     );

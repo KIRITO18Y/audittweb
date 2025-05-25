@@ -1,4 +1,5 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { JSX } from 'react';
 
 export interface ButtonModel {
    name: string;

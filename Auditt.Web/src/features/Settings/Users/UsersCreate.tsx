@@ -20,10 +20,6 @@ export const UserCreate = () => {
    const handleCreate = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
 
-      if (user.password !== confirmPassword) {
-         toast.error('Las contraseñas no coinciden');
-         return;
-      }
       const res = await createUser.mutateAsync(user);
 
       if (!res.isSuccess) {

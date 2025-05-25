@@ -1,4 +1,4 @@
-import { SimpleNavItem } from "../../shared/components/Navigation/NavVerticalItem";
+import { SimpleNavItem } from "../../shared/components/Navigation/SimpleNavItem";
 
 export const LinkSettings = () => {
   return (

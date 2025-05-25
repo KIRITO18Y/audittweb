@@ -1,5 +1,5 @@
 import { Direction, Size } from "./Models";
-import { useEffect } from "react";
+import { JSX, useEffect } from "react";
 import './OffCanvas.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";

@@ -15,7 +15,6 @@ export const Roles = () => {
     const { roles, createRole, queryRoles, deleteRole } = useRoles();
     const refForm = useRef<HTMLFormElement>(null);
     const [visible, setVisible] = useState(false);
-    const [rolesId, setRolesId] = useState(0);
     const [openPermissionRoles, setOpenPermissionRoles] = useState<Set<number>>(new Set());
 
     useEffect(() => {
@@ -27,7 +26,7 @@ export const Roles = () => {
 
     const handleEdit = (id: number) => {
         setVisible(true);
-        setRolesId(id);
+        console.log(id);    
     }
 
     const handleClose = () => {

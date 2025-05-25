@@ -1,5 +1,6 @@
+import { JSX } from 'react';
 import { ButtonModel, NavVerticalItemModel } from './Model';
-import NavVerticalItem from './NavVerticalItem';
+import {SimpleNavItem} from './SimpleNavItem';
 
 const NavVertical = ({
 	title,
@@ -27,12 +28,10 @@ const NavVertical = ({
 				<div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
 					{items?.map((x) => {
 						return (
-							<NavVerticalItem
+							<SimpleNavItem
 								key={x.id}
-								description={x.description}
+								to={x.url}
 								title={x.name}
-								url={x.url}
-								fontIcon={x.fontIcon}
 							/>
 						);
 					})}

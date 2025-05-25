@@ -6,7 +6,6 @@ export const GuideUpdate = ({ data }: { data: GuideModel }) => {
     const { updateGuide } = useGuide();
     const [guide, setGuide] = useState<GuideModel>(data);
     const { scales, } = useScales();
-    const [selectedScaleId, setSelectedScaleId] = useState<string>("");
     const refForm = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
@@ -64,7 +63,6 @@ export const GuideUpdate = ({ data }: { data: GuideModel }) => {
                         required
                         value={guide.idScale}
                         onChange={(e) => {
-                            setSelectedScaleId(e.target.value); 
                             setGuide({ ...guide, idScale: parseInt(e.target.value, 10) });
                         }}
                     >
