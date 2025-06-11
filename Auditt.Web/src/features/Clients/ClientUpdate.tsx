@@ -84,7 +84,6 @@ export const ClientUpdate = ({ data }: { data: ClientModel }) => {
                         type="text"
                         name="manager"
                         value={client.manager}
-                        required
                         className="w-full border border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500
                          hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                         onChange={handleChange} />
@@ -96,7 +95,6 @@ export const ClientUpdate = ({ data }: { data: ClientModel }) => {
                         type="text"
                         name="assistantManager"
                         value={client.assistantManager}
-                        required
                         className="w-full border border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500
                          hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                         onChange={handleChange} />

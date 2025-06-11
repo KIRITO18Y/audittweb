@@ -58,7 +58,7 @@ export const Guide = () => {
         <div className="p-6 w-full">
             <div>
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mr-2 mb-5 ">Instrumentos o Guias</h2>
+                    <h2 className="text-2xl font-semibold mr-2 mb-5 ">Instrumentos o Guías</h2>
                     <div className="flex">
                         <div className="relative mr-4">
                             <div className=" inline-flex mr-2">
@@ -68,7 +68,7 @@ export const Guide = () => {
                                     placeholder="Buscar Guidas"
                                     className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                  <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 mr-2 text-gray-400"/>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 mr-2 text-gray-400" />
                             </div>
                         </div>
                         <button onClick={() => setVisible(true)} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 rounded-lg font-semibold mb-5 mr-2">
@@ -79,7 +79,7 @@ export const Guide = () => {
                 <div>
                     <div className="grid grid-cols-4">
                         <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Nombre</div>
-                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Descripcion</div>
+                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Descripción</div>
                         <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Preguntas</div>
                         <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
                     </div>
