@@ -3,6 +3,7 @@ import {
 	createClientServices,
 	deleteClientServices,
 	getClients,
+	importClientServices,
 	updateClientServices,
 } from "./ClientServices";
 import { toast } from "react-toastify";
@@ -56,11 +57,26 @@ export const useClient = () => {
 		},
 	});
 
+	const importClient = useMutation({
+		mutationFn: importClientServices,
+		onSuccess: (data) => {
+			if (!data.isSuccess) {
+				toast.info(data.message);
+			} else {
+				if (data.isSuccess) {
+					toast.success(data.message);
+					queryClients.refetch();
+				}
+			}
+		},
+	});
+
 	return {
 		clients: queryClients?.data?.data,
 		queryClients,
 		createClient,
 		deleteClient,
 		updateClient,
+		importClient,
 	};
 };

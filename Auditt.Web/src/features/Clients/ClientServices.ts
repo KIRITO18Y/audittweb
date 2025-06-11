@@ -1,4 +1,4 @@
- import { ApiClient } from "../../shared/helpers/ApiClient";
+import { ApiClient } from "../../shared/helpers/ApiClient";
 import { MsgResponse } from "../../shared/model";
 import { ClientModel } from "./ClientModel";
 export const getClients = async (): Promise<MsgResponse<ClientModel[]>> => {
@@ -18,26 +18,6 @@ export const getClients = async (): Promise<MsgResponse<ClientModel[]>> => {
 
 	return response.data;
 };
-
-// export const getPagerClients = async (
-// 	page: number = 1,
-// 	pageSize: number = 5
-// ): Promise<MsgResponse<ClientPagerModel[]>> => {
-// 	const url = `api/clients/pager?pageIndex=${page}&pageSize=${pageSize}`;
-// 	const response = await ApiClient.get<MsgResponse<ClientPagerModel[]>>(url);
-// 	if (response.status !== 200 && response.status !== 201) {
-// 		return {
-// 			isSuccess: false,
-// 			message: "Error al obtener clientes",
-// 			isFailure: true,
-// 			error: {
-// 				code: response.status.toString(),
-// 				message: response.statusText,
-// 			},
-// 		};
-// 	}
-// 	return response.data;
-// };
 
 export const createClientServices = async (
 	model: ClientModel
@@ -91,6 +71,38 @@ export const deleteClientServices = async (
 		return {
 			isSuccess: false,
 			message: "Error al eliminar el cliente",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
+
+	return response.data;
+};
+
+export const importClientServices = async (
+	file: File
+): Promise<MsgResponse<ClientModel[]>> => {
+	const formData = new FormData();
+	formData.append("file", file);
+
+	const url = "api/institutions/import";
+	const response = await ApiClient.post<MsgResponse<ClientModel[]>>(
+		url,
+		formData,
+		{
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		}
+	);
+
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al importar el cliente",
 			isFailure: true,
 			error: {
 				code: response.status.toString(),

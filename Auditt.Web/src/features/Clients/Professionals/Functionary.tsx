@@ -12,12 +12,16 @@ import { FunctionaryUpdate } from "./FunctionaryUpdate";
 import { ButtonUpdate } from "../../../shared/components/Buttons/ButtonDetail";
 import { faMagnifyingGlass, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FunctionaryImport } from "./FunctionaryImport";
+import { useFileDownload } from "../../../shared/components/FilesDowload";
 export const Functionary = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
     const { functionarys, queryFunctionary, deleteFunctionary } = useFunctionary();
     const [functionary, setFunctionary] = useState<FunctionaryModel>();
     const [searFunctionarys, setSearFunctionarys] = useState('');
+    const [visibleImport, setVisibleImport] = useState(false);
+    const { descargarArchivo } = useFileDownload();
 
     const handleClickDetail = (functionarySelected: FunctionaryModel) => {
         if (functionarySelected) {
@@ -46,7 +50,7 @@ export const Functionary = () => {
     }
 
     if (queryFunctionary.isLoading)
-        return <Bar/>
+        return <Bar />
 
     const normalizeText = (text: string) =>
         text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -60,16 +64,21 @@ export const Functionary = () => {
         return words.some(word => word.startsWith(search));
     });
 
+    const handleDownloadTemplate = async () => {
+        const urlBlob = `/api/functionaries/template-import`;
+        await descargarArchivo(urlBlob, "Plantilla_Importar_Profesionales_" + new Date().toISOString().split('T')[0] + ".xlsx");
+    }
+
     return (
         <div className="w-full p-6">
             <div>
                 <div className="flex space-x-8 text-lg font-medium mb-4 mr-2">
-                    <LinkClients/>
+                    <LinkClients />
                 </div>
 
                 <div className="flex justify-between">
                     <h2 className="text-2xl font-semibold mb-3 mr-2">Profesionales </h2>
-                    
+
                     <div className="flex">
                         <div className="relative mr-4">
                             <div className=" inline-flex">
@@ -79,12 +88,15 @@ export const Functionary = () => {
                                     placeholder="Buscar Profecional"
                                     className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400"/>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
                             </div>
                         </div>
-                    <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
-                        Crear Profesional
-                    </button>
+                        <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
+                            Crear Profesional
+                        </button>
+                        <button onClick={() => setVisibleImport(true)} className="cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
+                            Importar
+                        </button>
                     </div>
                 </div>
 
@@ -122,6 +134,17 @@ export const Functionary = () => {
                     <FunctionaryUpdate data={functionary} />
                 </OffCanvas>
             }
+            <OffCanvas titlePrincipal='Importar profesionales' visible={visibleImport} xClose={() => setVisibleImport(false)} position={Direction.Right}>
+                <div>
+                    <p className="mb-4">Aquí puedes importar profesionales desde un archivo Excel, a continuación descarga la plantilla.</p>
+                    <button onClick={handleDownloadTemplate} className="mb-6 cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mr-2">
+                        Descargar Plantilla
+                    </button>
+                    <h3 className="text-xl font-semibold mb-2">Importar datos</h3>
+                    {/* Aquí puedes agregar el formulario o componente para la importación */}
+                    <FunctionaryImport />
+                </div>
+            </OffCanvas>
         </div>
     );
 }

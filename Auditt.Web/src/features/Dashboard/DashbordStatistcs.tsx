@@ -16,7 +16,7 @@ export const DashboradStatistcs = () => {
             </div>
             <div className="mt-4 flex justify-center gap-4">
                 <DashboardCard title="Total Pacientes" value={dashboard?.patientsCount ?? 0} textColor="text-pink-500" />
-                <DashboardCard title="Total Valoraciones" value={dashboard?.valuationsCount ?? 0} textColor="text-audittprimary" />
+                <DashboardCard title="Total Evaluaciones" value={dashboard?.valuationsCount ?? 0} textColor="text-audittprimary" />
                 <DashboardCard title="Total Profesionales" value={dashboard?.functionariesCount ?? 0} textColor="text-purple-500 " />
             </div>
 

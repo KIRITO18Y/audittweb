@@ -5,6 +5,7 @@ import {
 	getPatientByDocument,
 	getPatientById,
 	getPatients,
+	importPatientsServices,
 	updatePatientsServices,
 } from "./PantientsServices";
 import { toast } from "react-toastify";
@@ -73,12 +74,32 @@ export const usePatients = () => {
 		},
 	});
 
+	const importPatients = useMutation({
+		mutationFn: importPatientsServices,
+		onSuccess: (data) => {
+			if (!data.isSuccess) {
+				if (data?.message) {
+					toast.info(data.message);
+				}
+				if (data?.error) {
+					toast.info(data.error.message);
+				}
+			} else {
+				if (data.isSuccess) {
+					toast.success(data.message);
+					queryPatients.refetch();
+				}
+			}
+		},
+	});
+
 	return {
 		patients: queryPatients?.data?.data,
 		queryPatients,
 		createPatients,
 		deletePatients,
 		updatePatients,
+		importPatients,
 	};
 };
 

@@ -20,6 +20,36 @@ export const getPatients = async (): Promise<MsgResponse<PatientsModel[]>> => {
 	return response.data;
 };
 
+export const importPatientsServices = async (
+	file: File
+): Promise<MsgResponse<PatientsModel[]>> => {
+	const url = "api/patients/import";
+	const formData = new FormData();
+	formData.append("file", file);
+	const response = await ApiClient.post<MsgResponse<PatientsModel[]>>(
+		url,
+		formData,
+		{
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		}
+	);
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al importar los pacientes",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
+
+	return response.data;
+};
+
 export const createPatientsServices = async (
 	model: PatientsModel
 ): Promise<MsgResponse<PatientsModel>> => {

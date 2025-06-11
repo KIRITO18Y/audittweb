@@ -23,7 +23,7 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
     }, [valuations]);
 
     if (!valuations) {
-        return <div>No se encontraron valoraciones</div>
+        return <div>No se encontraron evaluaciones</div>
     }
 
     const handleChange = (newValue: HTMLSelectElement, valuation: ValuationModel) => {

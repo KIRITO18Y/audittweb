@@ -62,7 +62,7 @@ export const Assessments = () => {
                 <div className="p-4 flex gap-4 justify-between">
                     <h1 className="text-2xl font-semibold">Evaluaciones o auditorias</h1>
                     <Link to={'/Assessments/Create'} title='Crear' className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold ">
-                        Realizar valoraciones
+                        Realizar evaluaciones
                     </Link>
                 </div>
                 <div className="flex-1 p-4">

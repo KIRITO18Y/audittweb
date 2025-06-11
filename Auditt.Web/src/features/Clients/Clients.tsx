@@ -13,12 +13,16 @@ import { LinkClients } from "../Dashboard/LinkClients";
 import { ButtonUpdate } from "../../shared/components/Buttons/ButtonDetail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useFileDownload } from "../../shared/components/FilesDowload";
+import { ClientImport } from "./ClientImport";
 export const Clients = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
+    const [visibleImport, setVisibleImport] = useState(false);
     const { clients, queryClients, deleteClient } = useClient();
     const [client, setClient] = useState<ClientModel>();
     const [searClients, setSearClients] = useState('');
+    const { descargarArchivo } = useFileDownload();
 
     const handleClickDetail = (clientSelected: ClientModel) => {
         if (clientSelected) {
@@ -44,7 +48,7 @@ export const Clients = () => {
     }
 
     if (queryClients.isLoading)
-        return <Bar/>
+        return <Bar />
 
     const normalizeText = (text: string) =>
         text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -57,15 +61,20 @@ export const Clients = () => {
         return words.some(word => word.startsWith(search));
     });
 
+    const handleDownloadTemplate = async () => {
+        const urlBlob = `/api/institutions/template-import`;
+        await descargarArchivo(urlBlob, "Plantilla_Importar_Clientes_" + new Date().toISOString().split('T')[0] + ".xlsx");
+    }
+
     return (
         <div className="p-6 w-full">
             <div>
                 <div className="flex space-x-8 text-lg font-medium mb-4 mr-2">
-                    <LinkClients/>
+                    <LinkClients />
                 </div>
 
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mb-3 mr-2">Clientes o Instituciones</h2>    
+                    <h2 className="text-2xl font-semibold mb-3 mr-2">Clientes o Instituciones</h2>
                     <div className="flex">
                         <div className="relative mr-4">
                             <div className="inline-flex">
@@ -75,11 +84,14 @@ export const Clients = () => {
                                     placeholder="Buscar Cliente"
                                     className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400"/>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
                             </div>
                         </div>
                         <button onClick={() => setVisible(true)} className=" cursor-pointer bg-[#392f5a] cursor-por hover:bg-indigo-900 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
                             Crear Cliente
+                        </button>
+                        <button onClick={() => setVisibleImport(true)} className=" cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
+                            Importar
                         </button>
                     </div>
                 </div>
@@ -100,7 +112,7 @@ export const Clients = () => {
                                 <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.city}</div>
                                 <div className="flex justify-center text-sm px-2  border border-gray-300 py-1">
                                     <div onClick={() => handleClickDetail(client)}>
-                                        <ButtonUpdate/>
+                                        <ButtonUpdate />
                                     </div>
                                     <ButtonDelete id={client.id ?? 0} onDelete={handleDelete} />
                                 </div>
@@ -109,14 +121,26 @@ export const Clients = () => {
                     </div>
                 </div>
                 <OffCanvas titlePrincipal='Crear Cliente' visible={visible} xClose={() => setVisible(false)} position={Direction.Right}>
-                    <ClientCreate/>
+                    <ClientCreate />
                 </OffCanvas>
                 {
                     client &&
                     <OffCanvas titlePrincipal='Actualizar Cliente' visible={visibleUpdate} xClose={() => setVisibleUpdate(false)} position={Direction.Right}>
-                        <ClientUpdate data={client}/>
+                        <ClientUpdate data={client} />
                     </OffCanvas>
                 }
+                <OffCanvas titlePrincipal='Importar Cliente' visible={visibleImport} xClose={() => setVisibleImport(false)} position={Direction.Right}>
+                    <div>
+                        <p className="mb-4">Aquí puedes importar clientes desde un archivo Excel, a continuación descarga la plantilla.</p>
+                        <button onClick={handleDownloadTemplate} className="mb-6 cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mr-2">
+                            Descargar Plantilla
+                        </button>
+                        <h3 className="text-xl font-semibold mb-2">Importar datos</h3>
+                        {/* Aquí puedes agregar el formulario o componente para la importación */}
+                        <ClientImport />
+                    </div>
+                </OffCanvas>
+
             </div>
         </div>
     );

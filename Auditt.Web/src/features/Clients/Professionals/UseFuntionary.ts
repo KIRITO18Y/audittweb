@@ -3,6 +3,7 @@ import {
 	createFunctionaryServices,
 	deleteFunctionaryServices,
 	getFunctionary,
+	importFunctionaryServices,
 	updateFunctionaryServices,
 } from "./FunctionaryServices";
 import { toast } from "react-toastify";
@@ -18,7 +19,12 @@ export const useFunctionary = () => {
 		mutationFn: createFunctionaryServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) {
+					toast.info(data.message);
+				}
+				if (data?.error) {
+					toast.info(data.error.message);
+				}
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);
@@ -32,7 +38,12 @@ export const useFunctionary = () => {
 		mutationFn: updateFunctionaryServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) {
+					toast.info(data.message);
+				}
+				if (data?.error) {
+					toast.info(data.error.message);
+				}
 			} else {
 				toast.success(data.message);
 				queryFunctionary.refetch();
@@ -44,8 +55,33 @@ export const useFunctionary = () => {
 		mutationFn: deleteFunctionaryServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) {
+					toast.info(data.message);
+				}
+				if (data?.error) {
+					toast.info(data.error.message);
+				}
 			} else {
+				if (data.isSuccess) {
+					toast.success(data.message);
+					queryFunctionary.refetch();
+				}
+			}
+		},
+	});
+
+	const importFunctionary = useMutation({
+		mutationFn: importFunctionaryServices,
+		onSuccess: (data) => {
+			if (!data.isSuccess) {
+				if (data?.message) {
+					toast.info(data.message);
+				}
+				if (data?.error) {
+					toast.info(data.error.message);
+				}
+			} else {
+				console.log(data, "importFunctionary");
 				if (data.isSuccess) {
 					toast.success(data.message);
 					queryFunctionary.refetch();
@@ -60,5 +96,6 @@ export const useFunctionary = () => {
 		createFunctionary,
 		deleteFunctionary,
 		updateFunctionary,
+		importFunctionary,
 	};
 };
