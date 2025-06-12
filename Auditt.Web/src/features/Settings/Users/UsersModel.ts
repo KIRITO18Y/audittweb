@@ -5,7 +5,11 @@ export interface UsersModel {
 	email: string;
 	password?: string;
 	securePharse?: string;
-	
+}
+
+export interface UserUpdateInstitution {
+	idUser: number;
+	idInstitution: number;
 }
 
 export interface UsersResponseModel {
@@ -15,8 +19,9 @@ export interface UsersResponseModel {
 	email: string;
 	password?: string;
 	securePharse?: string;
-	 roleName: string;
-	idEstado: Number;
+	idRol: number;
+	roleName: string;
+	idEstado: number;
 	idAvatar?: number;
 	urlProfile?: string;
 }

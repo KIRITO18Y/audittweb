@@ -85,7 +85,7 @@ export const Functionary = () => {
                                 <input type="text"
                                     value={searFunctionarys}
                                     onChange={(e) => setSearFunctionarys(e.target.value)}
-                                    placeholder="Buscar Profecional"
+                                    placeholder="Buscar Profesional"
                                     className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
                                 <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />

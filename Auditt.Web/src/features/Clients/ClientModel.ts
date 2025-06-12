@@ -8,6 +8,11 @@ export interface ClientModel {
 	assistantManager: string;
 }
 
+export interface ClientUpdateStatusModel {
+	id: number;
+	statusId: string;
+}
+
 export interface ClientsResponseModel {
 	id: number;
 	firstName: string;

@@ -66,18 +66,18 @@ export const UserUpdate = ({ data }: { data: UsersResponseModel }) => {
             <div>
                <label
                   className="block text-gray-600 text-sm font-bold mb-2">
-                  Roles
+                  Rol
                </label>
                <div className="relative">
-                  <input
-                     value={user.roleName}
-                     name="roleName"
-                     required
-                     className="w-full border border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500
-                     hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-2"
-                     placeholder="Roles"
+                  <select
+                     name="idRol"
+                     value={user.idRol?.valueOf()}
                      onChange={handleChange}
-                  />
+                     className="w-full border border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500
+                     hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-2">
+                     <option value={1}>Admin</option>
+                     <option value={2}>Estandar</option>
+                  </select>
                </div>
             </div>
 

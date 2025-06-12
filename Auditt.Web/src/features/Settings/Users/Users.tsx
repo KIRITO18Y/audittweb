@@ -1,18 +1,16 @@
 import { useState } from "react";
 import OffCanvas from "../../../shared/components/OffCanvas/Index";
 import { LinkSettings } from "../../Dashboard/LinkSenttings";
-import { UserCreate } from "./UsersCreate";
 import { Direction } from "../../../shared/components/OffCanvas/Models";
 import { useUser } from "./useUser";
 import { UserUpdate } from "./UserUpdate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPen } from "@fortawesome/free-solid-svg-icons";
 import { UsersResponseModel } from "./UsersModel";
 import { UserStatusLabel } from "./UsersEstado";
 
 export const Users = () => {
     const { users } = useUser();
-    const [visible, setVisible] = useState(false);
     const [user, setUser] = useState<UsersResponseModel>();
     const [visibleUpdate, setVisibleUpdate] = useState(false);
 
@@ -28,18 +26,11 @@ export const Users = () => {
             <div className="flex space-x-8 text-lg font-medium mb-6 mr-2">
                 <LinkSettings />
             </div>
-
-            <div>
-                <button onClick={() => setVisible(true)} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-2 rounded-lg font-semibold mb-2 cursor-pointer">
-                    Crear Usuario
-                </button>
-            </div>
-
             <div className="grid grid-cols-1 gap-4">
                 {users?.map((user) => (
                     <div
                         key={user.id}
-                        className="flex items-center space-x-6 border p-4 rounded-xl shadow-md w-max">
+                        className="flex items-center justify-between text-center space-x-6 border border-gray-400 p-4 rounded-xl shadow-md w-1/2 hover:bg-gray-50 transition-colors cursor-pointer">
                         <div>
                             <img
                                 src={user.urlProfile}
@@ -55,36 +46,29 @@ export const Users = () => {
                         </div>
                         <div className="font-bold text-sm text-indigo-900 uppercase">
                             <span>{user.roleName}</span>
+                            <div className="flex items-center space-x-1">
+                                <span className="text-sm font-semibold text-lime-600">
+                                    <UserStatusLabel idEstado={Number(user.idEstado)} />
+                                </span>
+                            </div>
                         </div>
-
-                        <div className="flex items-center space-x-1">
-                            <span className="text-sm font-semibold text-lime-600"><UserStatusLabel idEstado={Number(user.idEstado)} /></span>
-                        </div>
-
                         <div className="flex items-center space-x-2">
                             <div className="w-8 h-8 flex items-center justify-center rounded-full border border-blue-300 text-blue-900 cursor-pointer">
                                 <FontAwesomeIcon icon={faBars} className="text-blue-400" />
                             </div>
-
-                            <div className="w-8 h-8 flex items-center justify-center rounded-full border border-blue-300 text-blue-900 cursor-pointer">
-                                <FontAwesomeIcon icon={faUser} className="text-blue-500" />
-                            </div>
-                            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-green-200 text-green-600 cursor-pointer">
-                                <FontAwesomeIcon icon={faPen} className="" onClick={() => handleClickDetail(user)} />
+                            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-green-200 text-green-600 cursor-pointer" onClick={() => handleClickDetail(user)} >
+                                <FontAwesomeIcon icon={faPen} className="" />
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-            <OffCanvas titlePrincipal='Crear Usuario' visible={visible} xClose={() => setVisible(false)} position={Direction.Right}  >
-                <UserCreate/>
-            </OffCanvas>
-            {
-                user &&
+            {user && (
                 <OffCanvas titlePrincipal='Actualizar Usuario' visible={visibleUpdate} xClose={() => setVisibleUpdate(false)} position={Direction.Right}>
                     <UserUpdate data={user} />
                 </OffCanvas>
-            }
+            )}
+
         </div>
     );
 }

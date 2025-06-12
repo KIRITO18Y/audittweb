@@ -17,13 +17,9 @@ export const Login = () => {
                   className="mt-8 cursor-pointer bg-red-500 text-white  text-2xl font-bold px-6 py-3 rounded-full shadow-lg hover:bg-red-700 transition duration-300 ">
                   Iniciar sesión con GOOGLE
                </button>
-               {/* <button
-                  className="mt-8 cursor-pointer bg-purple-500 text-white text-lg font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-purple-700 transition duration-300">
-                  Registrarse
-               </button> */}
             </div>
 
-            <div className="w-1/2 relative bg-gradient-to-br from-indigo-700 to-purple-800 overflow-hidden">
+            <div className="w-1/2 relative bg-gradient-to-br bg-[url('images/bg-login.png')] bg-cover from-indigo-700 to-purple-800 overflow-hidden">
                <defs>
                   <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
                      <stop offset="0%" stop-color="#ffffff33" />
