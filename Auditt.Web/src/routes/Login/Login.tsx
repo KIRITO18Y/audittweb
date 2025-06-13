@@ -31,7 +31,7 @@ export const Login = () => {
                </button>
             </div>
 
-            <div className="w-1/2 relative bg-gradient-to-br bg-[url('images/bg-login.png')] bg-cover from-indigo-700 to-purple-800 overflow-hidden">
+            <div className="w-1/2 relative bg-gradient-to-br bg-[url('/images/bg-login.png')] bg-cover from-indigo-700 to-purple-800 overflow-hidden">
                <defs>
                   <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
                      <stop offset="0%" stop-color="#ffffff33" />
