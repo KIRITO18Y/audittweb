@@ -27,7 +27,6 @@ export const PermissionCreate = () => {
         if (response.isSuccess) {
             refForm.current?.reset();
         }
-        console.log("data", permissions)
     }
 
     return (

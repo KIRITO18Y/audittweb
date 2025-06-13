@@ -18,15 +18,14 @@ export const Roles = () => {
     const [openPermissionRoles, setOpenPermissionRoles] = useState<Set<number>>(new Set());
 
     useEffect(() => {
-     if (roles) {
-        const allRolesIds = new Set(roles.map(role => role.id ?? 0));
-        setOpenPermissionRoles(allRolesIds)
-     }  
+        if (roles) {
+            const allRolesIds = new Set(roles.map(role => role.id ?? 0));
+            setOpenPermissionRoles(allRolesIds)
+        }
     }, [roles]);
 
     const handleEdit = (id: number) => {
         setVisible(true);
-        console.log(id);    
     }
 
     const handleClose = () => {
@@ -79,7 +78,7 @@ export const Roles = () => {
     };
 
     if (queryRoles.isLoading)
-        return <Bar/>
+        return <Bar />
 
     return (
         <div className="p-6">
@@ -110,17 +109,17 @@ export const Roles = () => {
                                 <div className="flex items-center ">
                                     <ButtonPlays
                                         xClick={() => togglePermissions(role.id ?? 0)}
-                                        isOpen={role.id !== undefined && openPermissionRoles.has(role.id)}/>
+                                        isOpen={role.id !== undefined && openPermissionRoles.has(role.id)} />
                                     <input
                                         value={role.name}
                                         readOnly
                                         className="border rounded px-2 py-1 mr-2" />
                                 </div>
-                                
+
                                 <div onClick={() => handleEdit(role.id ?? 0)}>
-                                    <ButtonPlus/>
+                                    <ButtonPlus />
                                 </div>
-                                
+
                                 <div>
                                     {role.id !== undefined && (
                                         <ButtonDelete id={role.id} onDelete={handleDelete} />
@@ -129,7 +128,7 @@ export const Roles = () => {
                             </div>
                             {role.id !== undefined && openPermissionRoles.has(role.id) && (
                                 <div className="mb-4">
-                                    <Permission/>
+                                    <Permission />
                                 </div>
                             )}
                         </div>
@@ -137,7 +136,7 @@ export const Roles = () => {
                 </div>
             </div>
             <OffCanvas titlePrincipal='Crear Permisos' visible={visible} xClose={handleClose} position={Direction.Right}  >
-                <PermissionCreate/>
+                <PermissionCreate />
             </OffCanvas>
         </div>
     );

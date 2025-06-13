@@ -19,6 +19,7 @@ import { DataCuts } from '../features/DataCuts/DataCuts.tsx';
 import { Assessments } from '../features/Assessment/Assessments.tsx';
 import { AssessmentDetail } from '../features/Assessment/AssessmentDetail.tsx';
 import { ReportContainer } from '../features/Reports/ReportContainer.tsx';
+import { ProtectedRoute } from '../shared/components/ProtectedRoute';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -34,7 +35,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/Clients',
-                element: <Clients />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Clients />
+                    </ProtectedRoute>
+                ),
             },
 
             {
@@ -49,7 +54,11 @@ export const router = createBrowserRouter([
 
             {
                 path: '/Guide',
-                element: <Guide />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Guide />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'Guide/:id',
@@ -58,7 +67,11 @@ export const router = createBrowserRouter([
 
             {
                 path: '/DataCuts',
-                element: <DataCuts />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <DataCuts />
+                    </ProtectedRoute>
+                ),
             },
 
             {
@@ -83,21 +96,37 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/Settings',
-                element: <Settings />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Settings />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: '/Users',
-                element: <Users />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Users />
+                    </ProtectedRoute>
+                ),
             },
 
             {
                 path: '/Scales',
-                element: <Scales />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Scales />
+                    </ProtectedRoute>
+                ),
             },
 
             {
                 path: '/Roles',
-                element: <Roles />,
+                element: (
+                    <ProtectedRoute requiredRole="Admin">
+                        <Roles />
+                    </ProtectedRoute>
+                ),
             },
 
 

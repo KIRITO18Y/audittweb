@@ -81,7 +81,6 @@ export const useFunctionary = () => {
 					toast.info(data.error.message);
 				}
 			} else {
-				console.log(data, "importFunctionary");
 				if (data.isSuccess) {
 					toast.success(data.message);
 					queryFunctionary.refetch();

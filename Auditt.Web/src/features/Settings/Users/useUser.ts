@@ -80,7 +80,6 @@ export const useUserInstitutions = (idUser: number) => {
 				if (data?.message) toast.info(data.message);
 				if (data?.error?.message) toast.error(data.error.message);
 			} else {
-				console.log("addUserInstitution", data);
 				if (data.isSuccess) {
 					toast.success(data.message);
 					queryUserInstitutions.refetch();

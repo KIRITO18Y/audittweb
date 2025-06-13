@@ -81,7 +81,6 @@ export const addUserInstitutionServices = async (
 			},
 		};
 	}
-	console.log("Response from addUserInstitutionServices:", response);
 	return response.data;
 };
 

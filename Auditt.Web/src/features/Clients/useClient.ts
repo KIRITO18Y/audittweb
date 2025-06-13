@@ -8,12 +8,14 @@ import {
 	updateStatusClientServices,
 } from "./ClientServices";
 import { toast } from "react-toastify";
+import useUserContext from "../../shared/context/useUserContext";
 
 const KEY = "clients";
 export const useClient = () => {
+	const { user } = useUserContext();
 	const queryClients = useQuery({
 		queryKey: [`${KEY}`],
-		queryFn: getClients,
+		queryFn: () => getClients(user?.id),
 	});
 
 	const createClient = useMutation({
@@ -76,7 +78,8 @@ export const useClient = () => {
 		mutationFn: updateStatusClientServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) toast.info(data.message);
+				if (data?.error) toast.error(data.error.message);
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);

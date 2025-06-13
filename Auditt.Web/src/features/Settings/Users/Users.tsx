@@ -16,7 +16,6 @@ export const Users = () => {
     const [visibleUpdate, setVisibleUpdate] = useState(false);
     const [visibleInstitutions, setVisibleInstitutions] = useState(false);
 
-
     const handleClickDetail = (userSelected: UsersResponseModel) => {
         if (userSelected) {
             setUser(userSelected);

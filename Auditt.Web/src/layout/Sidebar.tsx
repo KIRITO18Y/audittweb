@@ -5,6 +5,7 @@ import useUserContext from '../shared/context/useUserContext';
 export const Sidebar = () => {
    const urlApi = import.meta.env.VITE_API_URL;
    const { user } = useUserContext();
+   const isAdmin = user?.roleName === 'Admin';
    return (
       <div
          id="sidebar"
@@ -28,11 +29,15 @@ export const Sidebar = () => {
             <nav>
                <ul className="space-y-1">
                   <MenuItem icon={faHouse} path='/' text='Inicio' />
-                  <MenuItem icon={faUser} path='/Clients' text='Clientes' />
-                  <MenuItem icon={faUsers} path='/Guide' text='Instrumentos' />
-                  <MenuItem icon={faBoxesStacked} path='/DataCuts' text='Cortes Trimestrales' />
+                  {isAdmin && (
+                     <>
+                        <MenuItem icon={faUser} path='/Clients' text='Clientes' />
+                        <MenuItem icon={faUsers} path='/Guide' text='Instrumentos' />
+                        <MenuItem icon={faBoxesStacked} path='/DataCuts' text='Cortes Trimestrales' />
+                     </>
+                  )}
                   <MenuItem icon={faClipboardCheck} path='/Assessments' text='Medición de Adherencia' />
-                  <MenuItem icon={faGear} path='/Settings' text='Configuraciones' />
+                  {isAdmin && <MenuItem icon={faGear} path='/Settings' text='Configuraciones' />}
                   <li
                      onClick={() => {
                         window.location.href = `${urlApi}api/auth/google-logout`;

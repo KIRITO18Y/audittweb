@@ -6,11 +6,12 @@ export interface ClientModel {
 	city: string;
 	manager: string;
 	assistantManager: string;
+	idState: number;
 }
 
 export interface ClientUpdateStatusModel {
 	id: number;
-	statusId: string;
+	statusId: number;
 }
 
 export interface ClientsResponseModel {
@@ -24,6 +25,7 @@ export interface ClientsResponseModel {
 	address: string;
 	cellPhoneNumber: string;
 	phoneNumber: string;
+	idState: number;
 }
 
 export interface ClientPagerModel {

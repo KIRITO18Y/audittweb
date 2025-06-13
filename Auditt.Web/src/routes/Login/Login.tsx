@@ -1,9 +1,21 @@
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const Login = () => {
    const apiUrl = import.meta.env.VITE_API_URL;
    const handleLogin = async (): Promise<void> => {
       window.location.href = `${apiUrl}api/auth/google-login`;
    }
+
+   useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const error = params.get("error");
+      if (error && error === "UserNotActive") {
+         toast.error("El usuario no está activo. Por favor, contacta al administrador.", {
+            position: "bottom-center"
+         });
+      }
+   }, []);
 
    return (
       <div className="flex justify-center items-center h-screen bg-gray-200">

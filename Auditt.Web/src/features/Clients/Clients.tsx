@@ -5,7 +5,7 @@ import ButtonDelete from "../../shared/components/Buttons/ButtonDelete";
 import { Bar } from "../../shared/components/Progress/Bar";
 import { MouseEvent } from "react";
 import Swal from "sweetalert2";
-import { ClientModel } from "./ClientModel";
+import { ClientModel, ClientUpdateStatusModel } from "./ClientModel";
 import { ClientCreate } from "./ClientCreate";
 import { ClientUpdate } from "./ClientUpdate";
 import { useClient } from "./useClient";
@@ -15,14 +15,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useFileDownload } from "../../shared/components/FilesDowload";
 import { ClientImport } from "./ClientImport";
+import { useQueryClient } from "@tanstack/react-query";
+import { MsgResponse } from "../../shared/model";
 export const Clients = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
     const [visibleImport, setVisibleImport] = useState(false);
-    const { clients, queryClients, deleteClient } = useClient();
+    const { clients, queryClients, deleteClient, updateStatus } = useClient();
     const [client, setClient] = useState<ClientModel>();
     const [searClients, setSearClients] = useState('');
     const { descargarArchivo } = useFileDownload();
+    const queryClient = useQueryClient();
 
     const handleClickDetail = (clientSelected: ClientModel) => {
         if (clientSelected) {
@@ -64,6 +67,29 @@ export const Clients = () => {
     const handleDownloadTemplate = async () => {
         const urlBlob = `/api/institutions/template-import`;
         await descargarArchivo(urlBlob, "Plantilla_Importar_Clientes_" + new Date().toISOString().split('T')[0] + ".xlsx");
+    }
+
+    const handleUpdateStatus = async (id: number, status: boolean) => {
+        const model: ClientUpdateStatusModel = {
+            id: id,
+            statusId: status ? 1 : 2
+        };
+        queryClient.setQueryData(['clients'], (oldData: MsgResponse<ClientModel[]>) => {
+
+            const updateClient = oldData?.data?.map((client: ClientModel) => {
+                if (client.id === id) {
+                    return { ...client, idState: model.statusId };
+                }
+                return client;
+            });
+            const updatedData: MsgResponse<ClientModel[]> = {
+                ...oldData,
+                data: updateClient
+            };
+
+            return updatedData;
+        });
+        await updateStatus.mutateAsync(model);
     }
 
     return (
@@ -109,12 +135,20 @@ export const Clients = () => {
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{client.name}</div>
                                 <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.abbreviation}</div>
                                 <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.nit}</div>
-                                <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.city}</div>
-                                <div className="flex justify-center text-sm px-2  border border-gray-300 py-1">
+                                <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.city} - {client.id}</div>
+                                <div className="flex justify-center text-sm px-2  border border-gray-300 py-1 ">
+                                    <label className="inline-flex items-center cursor-pointer pr-2">
+                                        <input id="statudId" type="checkbox" checked={client.idState === 1} className="sr-only peer" onChange={e => handleUpdateStatus(client.id ?? 0, e.target.checked)} />
+                                        <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                                    </label>
+
                                     <div onClick={() => handleClickDetail(client)}>
                                         <ButtonUpdate />
                                     </div>
                                     <ButtonDelete id={client.id ?? 0} onDelete={handleDelete} />
+
+
+
                                 </div>
                             </div>
                         ))}

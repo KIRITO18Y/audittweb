@@ -1,9 +1,17 @@
 import { ApiClient } from "../../shared/helpers/ApiClient";
 import { MsgResponse } from "../../shared/model";
 import { ClientModel, ClientUpdateStatusModel } from "./ClientModel";
-export const getClients = async (): Promise<MsgResponse<ClientModel[]>> => {
+export const getClients = async (
+	idUser?: number
+): Promise<MsgResponse<ClientModel[]>> => {
+	const params = new URLSearchParams();
+	if (idUser) {
+		params.append("idUser", idUser.toString());
+	}
 	const url = `api/institutions`;
-	const response = await ApiClient.get<MsgResponse<ClientModel[]>>(url);
+	const response = await ApiClient.get<MsgResponse<ClientModel[]>>(url, {
+		params,
+	});
 	if (response.status !== 200) {
 		return {
 			isSuccess: false,
@@ -64,7 +72,7 @@ export const updateClientServices = async (
 export const updateStatusClientServices = async (
 	model: ClientUpdateStatusModel
 ): Promise<MsgResponse<ClientModel>> => {
-	const url = `api/institutions/${model.id}/status`;
+	const url = `api/institutions/status`;
 	const response = await ApiClient.put<MsgResponse<ClientModel>>(url, model);
 
 	if (response.status !== 200 && response.status !== 201) {
