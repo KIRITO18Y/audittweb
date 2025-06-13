@@ -24,7 +24,7 @@ export const Roles = () => {
         }
     }, [roles]);
 
-    const handleEdit = (id: number) => {
+    const handleEdit = () => {
         setVisible(true);
     }
 
@@ -116,7 +116,7 @@ export const Roles = () => {
                                         className="border rounded px-2 py-1 mr-2" />
                                 </div>
 
-                                <div onClick={() => handleEdit(role.id ?? 0)}>
+                                <div onClick={() => handleEdit()}>
                                     <ButtonPlus />
                                 </div>
 

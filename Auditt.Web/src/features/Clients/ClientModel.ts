@@ -6,7 +6,7 @@ export interface ClientModel {
 	city: string;
 	manager: string;
 	assistantManager: string;
-	idState: number;
+	idState?: number;
 }
 
 export interface ClientUpdateStatusModel {
