@@ -12,6 +12,12 @@ export interface UserUpdateInstitution {
 	idInstitution: number;
 }
 
+export interface UserInstitution {
+	id: number;
+	name: string;
+	Nit: string;
+}
+
 export interface UsersResponseModel {
 	id?: number;
 	firstName: string;

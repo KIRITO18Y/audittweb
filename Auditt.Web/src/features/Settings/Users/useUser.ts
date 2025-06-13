@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const KEY = "user";
 export const useUser = () => {
-	const queryUser = useQuery({
+	const queryUserInstitutions = useQuery({
 		queryKey: [`${KEY}`],
 		queryFn: getUser,
 	});
@@ -24,7 +24,7 @@ export const useUser = () => {
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);
-					queryUser.refetch();
+					queryUserInstitutions.refetch();
 				}
 			}
 		},
@@ -38,22 +38,22 @@ export const useUser = () => {
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);
-					queryUser.refetch();
+					queryUserInstitutions.refetch();
 				}
 			}
 		},
 	});
 
 	return {
-		users: queryUser?.data?.data,
-		queryUser,
+		users: queryUserInstitutions?.data?.data,
+		queryUserInstitutions,
 		createUser,
 		updateUser,
 	};
 };
 
 export const useUserInstitutions = (idUser: number) => {
-	const queryUser = useQuery({
+	const queryUserInstitutions = useQuery({
 		queryKey: [`${KEY}-institutions`, idUser],
 		queryFn: () => getUserInstitutions(idUser),
 	});
@@ -62,11 +62,12 @@ export const useUserInstitutions = (idUser: number) => {
 		mutationFn: deleteUserInstitutionServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) toast.info(data.message);
+				if (data?.error?.message) toast.error(data.error.message);
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);
-					queryUser.refetch();
+					queryUserInstitutions.refetch();
 				}
 			}
 		},
@@ -76,19 +77,21 @@ export const useUserInstitutions = (idUser: number) => {
 		mutationFn: addUserInstitutionServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) toast.info(data.message);
+				if (data?.error?.message) toast.error(data.error.message);
 			} else {
+				console.log("addUserInstitution", data);
 				if (data.isSuccess) {
 					toast.success(data.message);
-					queryUser.refetch();
+					queryUserInstitutions.refetch();
 				}
 			}
 		},
 	});
 
 	return {
-		users: queryUser?.data?.data,
-		queryUser,
+		institutions: queryUserInstitutions?.data?.data,
+		queryUserInstitutions,
 		deleteUserInstitution,
 		addUserInstitution,
 	};

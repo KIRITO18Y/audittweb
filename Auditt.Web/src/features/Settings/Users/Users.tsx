@@ -8,17 +8,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faPen } from "@fortawesome/free-solid-svg-icons";
 import { UsersResponseModel } from "./UsersModel";
 import { UserStatusLabel } from "./UsersEstado";
+import { UserInstitutions } from "./UserInstitutions";
 
 export const Users = () => {
     const { users } = useUser();
     const [user, setUser] = useState<UsersResponseModel>();
     const [visibleUpdate, setVisibleUpdate] = useState(false);
+    const [visibleInstitutions, setVisibleInstitutions] = useState(false);
+
 
     const handleClickDetail = (userSelected: UsersResponseModel) => {
         if (userSelected) {
             setUser(userSelected);
             setVisibleUpdate(true)
         }
+    }
+
+    const handleVisibleInstitutions = (userSelected: UsersResponseModel) => {
+        if (!userSelected) return;
+        setUser(userSelected);
+        setVisibleInstitutions(true);
     }
 
     return (
@@ -45,17 +54,20 @@ export const Users = () => {
                             <span className="text-sm text-gray-500">{user.email}</span>
                         </div>
                         <div className="font-bold text-sm text-indigo-900 uppercase">
-                            <span>{user.roleName}</span>
+                            <span className={user.roleName === "ADMIN" ? "text-audittprimary" : "text-audittpurple"}>{user.roleName}</span>
                             <div className="flex items-center space-x-1">
                                 <span className="text-sm font-semibold text-lime-600">
                                     <UserStatusLabel idEstado={Number(user.idEstado)} />
                                 </span>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                            <div className="w-8 h-8 flex items-center justify-center rounded-full border border-blue-300 text-blue-900 cursor-pointer">
-                                <FontAwesomeIcon icon={faBars} className="text-blue-400" />
-                            </div>
+                        <div className="flex justify-end space-x-2 w-20">
+                            {user.roleName !== "ADMIN" && (
+                                <div className="w-8 h-8 flex items-center justify-center rounded-full border border-blue-300 text-blue-900 cursor-pointer" onClick={() => handleVisibleInstitutions(user)}>
+                                    <FontAwesomeIcon icon={faBars} className="text-blue-400" />
+                                </div>
+                            )}
+
                             <div className="w-8 h-8 flex items-center justify-center rounded-full bg-green-200 text-green-600 cursor-pointer" onClick={() => handleClickDetail(user)} >
                                 <FontAwesomeIcon icon={faPen} className="" />
                             </div>
@@ -69,6 +81,9 @@ export const Users = () => {
                 </OffCanvas>
             )}
 
+            <OffCanvas titlePrincipal="Instituciones" visible={visibleInstitutions} xClose={() => setVisibleInstitutions(false)} position={Direction.Right}>
+                <UserInstitutions user={user} />
+            </OffCanvas>
         </div>
     );
 }

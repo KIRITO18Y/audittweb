@@ -1,6 +1,10 @@
 import { ApiClient } from "../../../shared/helpers/ApiClient";
 import { MsgResponse } from "../../../shared/model";
-import { UsersResponseModel, UserUpdateInstitution } from "./UsersModel";
+import {
+	UserInstitution,
+	UsersResponseModel,
+	UserUpdateInstitution,
+} from "./UsersModel";
 
 export const getUser = async (): Promise<MsgResponse<UsersResponseModel[]>> => {
 	const url = `api/users`;
@@ -22,9 +26,9 @@ export const getUser = async (): Promise<MsgResponse<UsersResponseModel[]>> => {
 
 export const getUserInstitutions = async (
 	id: number
-): Promise<MsgResponse<UsersResponseModel[]>> => {
+): Promise<MsgResponse<UserInstitution[]>> => {
 	const url = `api/users/${id}/institutions`;
-	const response = await ApiClient.get<MsgResponse<UsersResponseModel[]>>(url);
+	const response = await ApiClient.get<MsgResponse<UserInstitution[]>>(url);
 	if (response.status !== 200) {
 		return {
 			isSuccess: false,
@@ -77,6 +81,7 @@ export const addUserInstitutionServices = async (
 			},
 		};
 	}
+	console.log("Response from addUserInstitutionServices:", response);
 	return response.data;
 };
 
