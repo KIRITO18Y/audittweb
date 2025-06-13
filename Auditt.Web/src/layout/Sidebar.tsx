@@ -5,7 +5,9 @@ import useUserContext from '../shared/context/useUserContext';
 export const Sidebar = () => {
    const urlApi = import.meta.env.VITE_API_URL;
    const { user } = useUserContext();
-   const isAdmin = user?.roleName === 'Admin';
+   console.log('Sidebar user:', user);
+   const isAdmin = user?.roleName === 'ADMIN';
+   console.log(isAdmin);
    return (
       <div
          id="sidebar"

@@ -20,10 +20,11 @@ export interface UserResponseModel {
 	lastName?: string;
 	email?: string;
 	idAvatar?: number;
-    roleName: string;
-	idEstado: Number;
-    active: any;
+	roleName: string;
+	idEstado: number;
 	urlProfile?: string;
+	idRol: number;
+	rolName?: string;
 }
 
 export interface CreateUserModel {
