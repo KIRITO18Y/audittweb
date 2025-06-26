@@ -54,7 +54,10 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
             confirmButtonText: 'Confirmar',
             cancelButtonText: 'Cancelar',
             preConfirm: async () => {
-                await deleteAssessment.mutate(id);
+                const res = await deleteAssessment.mutateAsync(id);
+                if (res.isSuccess) {
+                    setValues([]);
+                }
             }
         })
     }
