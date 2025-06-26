@@ -3,7 +3,6 @@ import { usePatients } from "./UsePatients";
 import { PatientsModel } from "./PantientsModel";
 
 type formData = {
-
     firstName: string;
     lastName: string;
     identification: string;
@@ -26,7 +25,7 @@ export const PatientsCreate = () => {
             firstName: patient.firstName ?? "",
             lastName: patient.lastName ?? "",
             identification: patient.identification ?? "",
-            birthDate: patient.birthDate ?? "",
+            birthDate: new Date(patient.birthDate),
             eps: patient.eps ?? "",
         };
 

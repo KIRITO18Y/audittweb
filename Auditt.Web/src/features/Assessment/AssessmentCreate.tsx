@@ -113,7 +113,7 @@ export const AssessmentCreate = () => {
 
             } else {
 
-                const birthDate = parseISO(patient?.birthDate ?? new Date().toString()); // Año, mes (0-indexado), día
+                const birthDate = parseISO(patient?.birthDate?.toString() ?? new Date().toString()); // Año, mes (0-indexado), día
                 const today = new Date();
 
                 const age = differenceInYears(today, birthDate);

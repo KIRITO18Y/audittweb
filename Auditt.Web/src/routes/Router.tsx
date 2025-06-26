@@ -7,7 +7,6 @@ import { BusinessCreate } from './Login/BusinessCreate.tsx';
 import { PasswordRecoverForm } from './Login/PasswordRecover.tsx';
 import { Clients } from '../features/Clients/Clients.tsx';
 import { Patients } from '../features/Clients/Patients/Patients.tsx';
-import { QuarterlyDetail } from '../features/DataCuts/QuarterlyDetail.tsx';
 import { Functionary } from '../features/Clients/Professionals/Functionary.tsx';
 import { Guide } from '../features/Guide/Guide.tsx';
 import { GuideDetail } from '../features/Guide/GuideDetail.tsx';
@@ -72,11 +71,6 @@ export const router = createBrowserRouter([
                         <DataCuts />
                     </ProtectedRoute>
                 ),
-            },
-
-            {
-                path: 'Quarterly/:Id',
-                element: <QuarterlyDetail />,
             },
             {
                 path: '/Assessments',
