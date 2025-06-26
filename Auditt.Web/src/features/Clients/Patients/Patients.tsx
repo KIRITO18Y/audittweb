@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { PatientsImport } from "./PatientsImport";
 import { useFileDownload } from "../../../shared/components/FilesDowload";
+import { format } from "date-fns";
 export const Patients = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -106,7 +107,7 @@ export const Patients = () => {
                             {filteredPatients?.map((patient) => (
                                 <div className="grid grid-cols-4 hover:bg-[#F4EDEE] transition-colors">
                                     <div className="text-sm px-2 py-2 border border-gray-300 text-center">{patient.identification}</div>
-                                    <div className="text-sm px-2 py-2 border border-gray-300 text-center">{patient.birthDate}</div>
+                                    <div className="text-sm px-2 py-2 border border-gray-300 text-center">{format(patient.birthDate, 'dd/MM/yyyy')}</div>
                                     <div className="text-sm px-2 py-2 border border-gray-300 text-center">{patient.eps}</div>
                                     <div className="flex justify-center text-sm px-2 border border-gray-300 py-1">
                                         <div onClick={() => handleClickDetail(patient)}  >

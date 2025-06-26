@@ -15,6 +15,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useUserContext from "../../shared/context/useUserContext";
 import { DataCutModel } from "./DataCutModels";
+import { format } from "date-fns";
 
 export const DataCuts = () => {
     const { client } = useUserContext();
@@ -114,11 +115,11 @@ export const DataCuts = () => {
                         <div key={item.id} className="grid grid-cols-5 hover:bg-[#F4EDEE] transition-colors">
                             <div className="text-sm px-2 py-2 border border-gray-300 text-center">{item.name}</div>
                             <div className="text-sm px-2 py-2 border border-gray-300 text-center">{item.maxHistory}</div>
-                            <div className="text-sm px-2 py-2 border border-gray-300 text-center">{item.initialDate.toString()}</div>
-                            <div className="text-sm px-2 py-2 border border-gray-300 text-center">{item.finalDate.toString()}</div>
+                            <div className="text-sm px-2 py-2 border border-gray-300 text-center">{format(item.initialDate, 'dd/MM/yyyy')}</div>
+                            <div className="text-sm px-2 py-2 border border-gray-300 text-center">{format(item.finalDate, 'dd/MM/yyyy')}</div>
                             <div className="flex justify-center text-sm px-2 border border-gray-300 py-1">
                                 <div onClick={() => handleUpdateClick(item)}>
-                                    <ButtonUpdate/>
+                                    <ButtonUpdate />
                                 </div>
                                 <ButtonDelete id={item.id ?? 0} onDelete={handleDelete} />
                             </div>

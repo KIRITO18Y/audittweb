@@ -3,6 +3,6 @@ export interface PatientsModel {
 	firstName?: string;
 	lastName?: string;
 	identification: string;
-	birthDate: string;
+	birthDate: Date;
 	eps: string;
 }

@@ -70,9 +70,9 @@ export const PatientsUpdate = ({ data }: { data: PatientsModel }) => {
                 <div>
                     <label className="block text-sm font-medium mb-1">Fecha de Nacimiento</label>
                     <input
-                        type="text"
+                        type="date"
                         name="birthDate"
-                        value={patient.birthDate}
+                        value={new Date(patient.birthDate).toISOString().substring(0, 10)}
                         required
                         className="w-full border border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500
                          hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
