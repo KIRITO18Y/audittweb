@@ -22,9 +22,15 @@ export const Sidebar = () => {
                </div>
 
                <div>
-                  <h4 className="text-white font-semibold w-64 truncate overflow-hidden whitespace-nowra p-2 text-center">
+                  <h4 className="text-white font-semibold w-64 truncate overflow-hidden whitespace-nowra pt-2 text-center">
                      {user?.firstName} {user?.lastName}
                   </h4>
+
+               </div>
+               <div>
+                  <span className="text-gray-400 text-sm text-center line-clamp-1">
+                     {user?.roleName}
+                  </span>
                </div>
             </div>
             <div className='text-center text-sm  text-gray-100 bg-gray-600 py-1'></div>

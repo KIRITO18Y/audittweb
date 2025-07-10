@@ -22,7 +22,8 @@ export const useClient = () => {
 		mutationFn: createClientServices,
 		onSuccess: (data) => {
 			if (!data.isSuccess) {
-				toast.info(data.message);
+				if (data?.message) toast.error(data.message);
+				if (data?.error) toast.error(data.error.message);
 			} else {
 				if (data.isSuccess) {
 					toast.success(data.message);

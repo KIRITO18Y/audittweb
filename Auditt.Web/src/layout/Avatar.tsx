@@ -12,6 +12,9 @@ export const Avatar = () => {
                     <span>{user?.firstName} {user?.lastName}</span>
                 </div>
                 <div className="shrink-0">
+                    <span>{user?.rolName}</span>
+                </div>
+                <div className="shrink-0">
                     <img
                         src={`${import.meta.env.BASE_URL}images/avatars/bigSmile-${user?.idAvatar}.svg`}
                         alt="logo"

@@ -24,7 +24,10 @@ export const useAssessments = () => {
 				idGuide: selectedGuide,
 			}),
 		enabled:
-			client?.id != null && selectedDataCut != null && selectedGuide != null,
+			client?.id != null &&
+			selectedDataCut != null &&
+			selectedGuide != null &&
+			selectedGuide !== 0,
 	});
 
 	const createAssessment = useMutation({

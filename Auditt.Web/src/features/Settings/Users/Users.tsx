@@ -38,7 +38,7 @@ export const Users = () => {
                 {users?.map((user) => (
                     <div
                         key={user.id}
-                        className="flex items-center justify-between text-center space-x-6 border border-gray-400 p-4 rounded-xl shadow-md w-1/2 hover:bg-gray-50 transition-colors cursor-pointer">
+                        className="flex items-center justify-between text-center space-x-6 border border-gray-400 p-4 rounded-xl shadow-md xl:w-7/12 hover:bg-gray-50 transition-colors cursor-pointer">
                         <div>
                             <img
                                 src={user.urlProfile}
