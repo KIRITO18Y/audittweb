@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import useUserContext from '../context/useUserContext';
 import { NoAccess } from './Alert/NoAccess';
+import { useAuth } from '../context/useAuth';
+import { Bar } from './Progress/Bar';
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -9,11 +10,18 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
-    const { user } = useUserContext();
+    const { loading, user } = useAuth();
 
-    if (!user) {
+    if (loading)
+        return <Bar Title='Cargando...' />;
+
+    if (!user && !loading) {
         // Si no hay usuario, redirigir al login
         return <Navigate to="/login" replace />;
+    }
+
+    if (!user) {
+        return <NoAccess />;
     }
 
     if (user.roleName !== requiredRole) {

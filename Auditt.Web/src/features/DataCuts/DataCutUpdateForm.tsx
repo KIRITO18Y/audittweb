@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useDataCuts } from "./useDataCuts";
 import { DataCutModel } from "./DataCutModels";
 
-export const DataCutUpdateForm = ({ dataCut }: { dataCut: DataCutModel }) => {
+export const DataCutUpdateForm = ({ dataCut }: { dataCut: DataCutModel | null }) => {
     const { updateDataCut } = useDataCuts();
-    const [DataCut, setDataCut] = useState<DataCutModel>(dataCut);
+    const [DataCut, setDataCut] = useState<DataCutModel | null>(dataCut);
     const refForm = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
@@ -15,6 +15,7 @@ export const DataCutUpdateForm = ({ dataCut }: { dataCut: DataCutModel }) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!DataCut) return;
         const response = await updateDataCut.mutateAsync(DataCut);
         if (response.isSuccess) {
             refForm.current?.reset();
@@ -22,11 +23,15 @@ export const DataCutUpdateForm = ({ dataCut }: { dataCut: DataCutModel }) => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if (!DataCut) return;
         setDataCut({
             ...DataCut,
             [e.target.name]: e.target.value,
         });
     };
+
+    if (!DataCut) return null;
 
     return (
         <div>

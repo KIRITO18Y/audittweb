@@ -130,12 +130,10 @@ export const DataCuts = () => {
                     titlePrincipal="Crear Cortes Trimestrales" visible={visibleCreate} xClose={() => setVisibleCreate(false)} position={Direction.Right}>
                     <DataCutCreateForm idInstitution={selectedClient?.value ?? "0"} />
                 </OffCanvas>
-                {selectedDataCut && (
-                    <OffCanvas
-                        titlePrincipal="Actualizar Cortes" visible={visibleUpdate} xClose={() => { setVisibleUpdate(false); setSelectedDataCut(null); }} position={Direction.Right}>
-                        <DataCutUpdateForm dataCut={selectedDataCut} />
-                    </OffCanvas>
-                )}
+                <OffCanvas
+                    titlePrincipal="Actualizar Cortes" visible={visibleUpdate} xClose={() => { setVisibleUpdate(false); setSelectedDataCut(null); }} position={Direction.Right}>
+                    <DataCutUpdateForm dataCut={selectedDataCut} />
+                </OffCanvas>
             </div>
         </div>
     );

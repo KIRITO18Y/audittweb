@@ -16,6 +16,7 @@ export const useClient = () => {
 	const queryClients = useQuery({
 		queryKey: [`${KEY}`],
 		queryFn: () => getClients(user?.id),
+		enabled: !!user?.id,
 	});
 
 	const createClient = useMutation({

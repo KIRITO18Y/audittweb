@@ -5,7 +5,7 @@ import { useAuth } from '../shared/context/useAuth';
 import { useEffect } from 'react';
 
 export default function Root() {
-   const { setIsAuthenticated, setUser } = useUserContext();
+   const { setIsAuthenticated, setUser, user: userContext } = useUserContext();
    const { checkAuth, loading, user } = useAuth();
    const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export default function Root() {
          setIsAuthenticated(true);
          setUser(user);
       }
-   }, [user, loading, navigate, setIsAuthenticated, setUser]);
+   }, [user, loading, navigate, setIsAuthenticated, setUser, userContext]);
 
    if (loading) {
       return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -34,11 +34,11 @@ export default function Root() {
             id="main"
             className="flex bg-gray-900"
          >
-            <Sidebar/>
+            <Sidebar />
             <div
                id="detail"
                className=" w-full bg-gray-100  min-h-screen">
-               <Outlet/>
+               <Outlet />
             </div>
          </div>
 

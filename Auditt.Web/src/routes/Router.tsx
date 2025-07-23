@@ -40,15 +40,31 @@ export const router = createBrowserRouter([
                     </ProtectedRoute>
                 ),
             },
-
             {
-                path: '/Patients',
-                element: <Patients />,
+                path: '/Clients/Clients',
+                element: (
+                    <ProtectedRoute requiredRole="ADMIN">
+                        <Clients />
+                    </ProtectedRoute>
+                ),
             },
 
             {
-                path: '/Functionary',
-                element: <Functionary />,
+                path: '/Clients/patients',
+                element: (
+                    <ProtectedRoute requiredRole="ADMIN">
+                        <Patients />
+                    </ProtectedRoute>
+                ),
+            },
+
+            {
+                path: '/Clients/Functionary',
+                element: (
+                    <ProtectedRoute requiredRole="ADMIN">
+                        <Functionary />
+                    </ProtectedRoute>
+                ),
             },
 
             {

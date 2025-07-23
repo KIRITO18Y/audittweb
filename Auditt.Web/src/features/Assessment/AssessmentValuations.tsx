@@ -81,13 +81,13 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
                 </button>
 
 
-                <button
+                {/* <button
                     className="border-[#392F5A] border-2 hover:bg-purple-100 transition-all hover:border-purple-950 text-[#392F5A]  px-6 py-2 rounded-lg font-semibold cursor-pointer"
                     onClick={handleSave}
                     disabled
                 >
                     Agregar pregunta
-                </button>
+                </button> */}
             </div>
             <div className="flex flex-col space-y-4">
                 {values.map((valuation) => (
