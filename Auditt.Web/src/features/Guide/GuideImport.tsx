@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useGuide } from "./useGuide";
 import { toast } from "react-toastify";
+import { useFileDownload } from "../../shared/components/FilesDowload";
 
 export const GuideImport = () => {
     const [file, setFile] = useState<File | null>(null);
-    const { importGuide, queryGuide, downloadTemplate } = useGuide();
-
+    const { importGuide, queryGuide } = useGuide();
+    const { descargarArchivo } = useFileDownload();
     const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
@@ -41,8 +42,9 @@ export const GuideImport = () => {
     };
 
     const handleDownloadTemplate = async () => {
-        await downloadTemplate.mutateAsync();
-    };
+        const urlBlob = `/api/guides/template-import`;
+        await descargarArchivo(urlBlob, "Plantilla_Importar_Guias_" + new Date().toISOString().split('T')[0] + ".xlsx");
+    }
 
     return (
         <div className="space-y-4">
@@ -58,9 +60,8 @@ export const GuideImport = () => {
                     type="button"
                     className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700"
                     onClick={handleDownloadTemplate}
-                    disabled={downloadTemplate.isPending}
                 >
-                    {downloadTemplate.isPending ? 'Descargando...' : 'Descargar Plantilla'}
+                    Descargar Plantilla
                 </button>
             </div>
 

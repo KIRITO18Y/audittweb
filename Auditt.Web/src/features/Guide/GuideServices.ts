@@ -84,19 +84,6 @@ export const deleteGuideServices = async (
 	return response.data;
 };
 
-export const downloadGuideTemplateServices = async (): Promise<Blob> => {
-	const url = "api/guides/template";
-	const response = await ApiClient.get(url, {
-		responseType: "blob",
-	});
-
-	if (response.status !== 200) {
-		throw new Error("Error al descargar la plantilla");
-	}
-
-	return response.data;
-};
-
 export const importGuideServices = async (
 	file: File
 ): Promise<MsgResponse<GuideModel[]>> => {

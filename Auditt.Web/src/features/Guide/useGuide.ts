@@ -5,7 +5,6 @@ import {
 	deleteGuideServices,
 	getGuide,
 	updateGuideServices,
-	downloadGuideTemplateServices,
 	importGuideServices,
 } from "./GuideServices";
 
@@ -58,25 +57,6 @@ export const useGuide = () => {
 		},
 	});
 
-	const downloadTemplate = useMutation({
-		mutationFn: downloadGuideTemplateServices,
-		onSuccess: (blob) => {
-			// Crear un enlace de descarga
-			const url = window.URL.createObjectURL(blob);
-			const link = document.createElement("a");
-			link.href = url;
-			link.download = "plantilla-guias.xlsx";
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-			window.URL.revokeObjectURL(url);
-			toast.success("Plantilla descargada exitosamente");
-		},
-		onError: () => {
-			toast.error("Error al descargar la plantilla");
-		},
-	});
-
 	const importGuide = useMutation({
 		mutationFn: importGuideServices,
 		onSuccess: (data) => {
@@ -98,7 +78,6 @@ export const useGuide = () => {
 		createGuide,
 		updateGuide,
 		deleteGuide,
-		downloadTemplate,
 		importGuide,
 	};
 };
