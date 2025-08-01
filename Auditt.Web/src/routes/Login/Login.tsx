@@ -21,7 +21,7 @@ export const Login = () => {
       <div className="flex justify-center items-center min-h-screen bg-gray-200">
          <div className="flex flex-col lg:flex-row h-screen w-full">
             {/* Left Section - Login Form */}
-            <div className="w-full lg:w-1/2 bg-white flex flex-col justify-center items-center p-6 lg:p-8">
+            <div className="w-full lg:w-1/2 min-h-1/2 bg-white flex flex-col justify-center items-center p-6 lg:p-8">
                <h1 className="text-4xl md:text-6xl lg:text-8xl text-center">
                   <span className="text-[#FF677D] font-bold">Auditt</span>
                   <span className="text-gray-800">Api</span>
@@ -33,8 +33,8 @@ export const Login = () => {
                </button>
             </div>
 
-            {/* Right Section - Background Image - Hidden on mobile */}
-            <div className="hidden lg:block w-1/2 relative bg-gradient-to-br bg-[url('/images/bg-login.png')] bg-cover from-indigo-700 to-purple-800 overflow-hidden">
+            {/* Right Section - Background Image  */}
+            <div className="lg:block w-full min-h-1/2 lg:min-h-full relative bg-gradient-to-br bg-[url('/images/bg-login.png')] bg-cover from-indigo-700 to-purple-800 overflow-hidden">
                <defs>
                   <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
                      <stop offset="0%" stopColor="#ffffff33" />
