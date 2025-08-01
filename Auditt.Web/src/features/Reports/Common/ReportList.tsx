@@ -9,13 +9,13 @@ export const ReportList = ({ listReports, idSelected, setSelected }: { listRepor
                 <div className="overflow-x-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-w-fit">
                         {listReports.map((report) => (
-                            <div 
-                                onClick={() => setSelected(report.idReport)} 
-                                key={report.idReport} 
+                            <div
+                                onClick={() => setSelected(report.idReport)}
+                                key={report.idReport}
                                 className={`
                                     flex flex-col border-audittpinkgray border-2 p-4 rounded-2xl transition-colors cursor-pointer min-w-48
-                                    ${report.idReport === idSelected 
-                                        ? "bg-pink-50 shadow-md" 
+                                    ${report.idReport === idSelected
+                                        ? "bg-pink-50 shadow-md"
                                         : "hover:bg-pink-50 hover:shadow-sm"
                                     }
                                 `}

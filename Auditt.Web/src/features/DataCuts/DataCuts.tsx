@@ -80,7 +80,7 @@ export const DataCuts = () => {
                     />
                 </div>
             </div>
-            
+
             <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-6">
                 <h1 className="text-xl sm:text-2xl font-semibold">Cortes trimestrales de auditoría</h1>
 
@@ -138,7 +138,7 @@ export const DataCuts = () => {
                         <div className="mb-4">
                             <h3 className="font-semibold text-lg text-gray-900 mb-2">{item.name}</h3>
                         </div>
-                        
+
                         <div className="space-y-3 mb-4">
                             <div className="flex justify-between">
                                 <span className="text-sm font-medium text-gray-500">Max Historias:</span>
@@ -153,7 +153,7 @@ export const DataCuts = () => {
                                 <span className="text-sm text-gray-900">{format(item.finalDate, 'dd/MM/yyyy')}</span>
                             </div>
                         </div>
-                        
+
                         <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
                             <div onClick={() => handleUpdateClick(item)}>
                                 <ButtonUpdate />
@@ -163,7 +163,7 @@ export const DataCuts = () => {
                     </div>
                 ))}
             </div>
-            
+
             <OffCanvas
                 titlePrincipal="Crear Cortes Trimestrales" visible={visibleCreate} xClose={() => setVisibleCreate(false)} position={Direction.Right}>
                 <DataCutCreateForm idInstitution={selectedClient?.value ?? "0"} />

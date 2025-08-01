@@ -18,8 +18,8 @@ export const Scales = () => {
     const [scaleId, setScaleId] = useState(0);
     const [openScale, setOpenScale] = useState<Set<number>>(new Set());
 
-    useEffect(() =>{
-        if(scales){
+    useEffect(() => {
+        if (scales) {
             const allScaleId = new Set(scales.map(scale => scale.id ?? 0));
             setOpenScale(allScaleId);
         }
@@ -65,24 +65,25 @@ export const Scales = () => {
         })
     }
     const toggleScale = (scaleId: number) => {
-    setOpenScale(prev => {
-        const newSet = new Set(prev);
-        if(newSet.has(scaleId)){
-            newSet.delete(scaleId);
-        }else {
-            newSet.add(scaleId);
-        }
-        return newSet;
-    })};
+        setOpenScale(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(scaleId)) {
+                newSet.delete(scaleId);
+            } else {
+                newSet.add(scaleId);
+            }
+            return newSet;
+        })
+    };
 
     if (queryScale.isLoading)
-        return <Bar/>
+        return <Bar />
 
     return (
         <div className="p-4 md:p-6">
             {/* Header Navigation */}
             <div className="flex flex-wrap gap-2 text-base md:text-lg font-medium mb-4 md:mb-6">
-                <LinkSettings/>
+                <LinkSettings />
             </div>
 
             {/* Create Scale Form */}
@@ -92,7 +93,7 @@ export const Scales = () => {
                         type="text"
                         name="name"
                         placeholder="Crear la escala"
-                        className="flex-1 shadow appearance-none bg-white border border-gray-300 rounded px-3 py-2 text-sm md:text-base transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                        className="flex-1 shadow appearance-none bg-white border border-gray-300 rounded px-3 py-2 text-sm md:text-base transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     />
                     <button
                         type="submit"
@@ -109,7 +110,7 @@ export const Scales = () => {
                         {/* Scale Header */}
                         <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center flex-1 min-w-0">
-                                <ButtonPlays 
+                                <ButtonPlays
                                     xClick={() => toggleScale(scale.id ?? 0)}
                                     isOpen={scale.id !== undefined && openScale.has(scale.id)}
                                 />
@@ -119,7 +120,7 @@ export const Scales = () => {
                                     className="border rounded px-2 py-1 mx-2 flex-1 min-w-0 text-sm md:text-base bg-gray-50"
                                 />
                             </div>
-                            
+
                             {/* Action Buttons */}
                             <div className="flex items-center gap-1 flex-shrink-0">
                                 <div onClick={() => handleEdit(scale.id ?? 0)}>
@@ -130,11 +131,11 @@ export const Scales = () => {
                                 )}
                             </div>
                         </div>
-                        
+
                         {/* Expandable Equivalence Section */}
                         {scale.id !== undefined && openScale.has(scale.id) && (
                             <div className="mt-4 border-t pt-4">
-                                <Equivalence/>
+                                <Equivalence />
                             </div>
                         )}
                     </div>

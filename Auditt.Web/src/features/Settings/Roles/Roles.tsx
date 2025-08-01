@@ -125,7 +125,7 @@ export const Roles = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         {role.id !== undefined && openPermissionRoles.has(role.id) && (
                             <div className="mt-4 pt-4 border-t border-gray-200">
                                 <Permission />
@@ -134,7 +134,7 @@ export const Roles = () => {
                     </div>
                 ))}
             </div>
-            
+
             <OffCanvas titlePrincipal='Crear Permisos' visible={visible} xClose={handleClose} position={Direction.Right}>
                 <PermissionCreate />
             </OffCanvas>

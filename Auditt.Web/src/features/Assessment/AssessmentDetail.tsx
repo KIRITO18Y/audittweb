@@ -27,7 +27,7 @@ export const AssessmentDetail = () => {
                     <span className="font-medium text-sm sm:text-base">IPS</span>
                     <ClientSelect className="w-full sm:w-auto min-w-48" selectedValue={selectedClient} isSearchable={true} />
                 </div>
-                
+
                 <div className="flex items-center">
                     <Link to={'/Reports'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base text-center" >
                         Ir a Indicadores e informes</Link>

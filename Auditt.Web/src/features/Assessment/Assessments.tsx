@@ -123,7 +123,7 @@ export const Assessments = () => {
                                         <span className="text-sm text-gray-900">{format(assessment.date, "dd/MM/yyyy")}</span>
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex justify-end pt-2 border-t border-gray-100">
                                     <button
                                         className="border-[#FF677D] border-2 hover:bg-[#ff677e88] transition-all text-[#921729c4] px-4 py-2 rounded-lg font-semibold cursor-pointer text-sm"

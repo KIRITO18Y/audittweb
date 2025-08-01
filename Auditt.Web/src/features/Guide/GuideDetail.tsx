@@ -17,7 +17,7 @@ export const GuideDetail = () => {
                 <h1 className="block text-xl sm:text-2xl font-semibold">Instrumento de Adherencia a GPC</h1>
             </div>
             <div className="w-full bg-white p-4 sm:p-6 rounded-lg mx-4">
-                <Questions/>
+                <Questions />
             </div>
         </div>
     )

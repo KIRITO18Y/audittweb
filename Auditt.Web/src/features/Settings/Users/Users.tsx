@@ -34,13 +34,13 @@ export const Users = () => {
             <div className="mb-6">
                 <LinkSettings />
             </div>
-            
+
             {/* Desktop Layout */}
             <div className="hidden lg:grid grid-cols-1 gap-4">
                 {users?.map((user) => (
                     <div
                         key={user.id}
-                        className="flex items-center justify-between text-center space-x-6 border border-gray-400 p-4 rounded-xl shadow-md xl:w-7/12 hover:bg-gray-50 transition-colors cursor-pointer">
+                        className="flex items-center bg-white justify-between text-center space-x-6 border border-gray-400 p-4 rounded-xl shadow-md xl:w-7/12 hover:bg-gray-50 transition-colors cursor-pointer">
                         <div>
                             <img
                                 src={user.urlProfile}
@@ -102,10 +102,10 @@ export const Users = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="flex justify-end space-x-2 pt-2 border-t border-gray-100">
                             {user.roleName !== "ADMIN" && (
-                                <button 
+                                <button
                                     className="flex items-center justify-center w-10 h-10 rounded-full border border-blue-300 text-blue-900 hover:bg-blue-50 transition-colors"
                                     onClick={() => handleVisibleInstitutions(user)}
                                 >
@@ -113,7 +113,7 @@ export const Users = () => {
                                 </button>
                             )}
 
-                            <button 
+                            <button
                                 className="flex items-center justify-center w-10 h-10 rounded-full bg-green-200 text-green-600 hover:bg-green-300 transition-colors"
                                 onClick={() => handleClickDetail(user)}
                             >
@@ -123,7 +123,7 @@ export const Users = () => {
                     </div>
                 ))}
             </div>
-            
+
             {user && (
                 <OffCanvas titlePrincipal='Actualizar Usuario' visible={visibleUpdate} xClose={() => setVisibleUpdate(false)} position={Direction.Right}>
                     <UserUpdate data={user} />

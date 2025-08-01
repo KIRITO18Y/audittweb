@@ -53,12 +53,12 @@ export const Equivalence = () => {
                                     <div className="flex gap-2 mt-2">
                                         <ButtonDeletes id={equivalence.id} onDelete={handleDelete} />
                                         <div onClick={() => handleOpenEdit(equivalence)}>
-                                            <ButtonDetails/>
+                                            <ButtonDetails />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             {/* Desktop Layout */}
                             <div className="hidden sm:flex sm:items-center sm:w-full">
                                 <label className="font-semibold mr-3 flex-shrink-0 text-sm">{equivalence.name}</label>
@@ -66,7 +66,7 @@ export const Equivalence = () => {
                                 <div className="flex gap-1 ml-auto">
                                     <ButtonDeletes id={equivalence.id} onDelete={handleDelete} />
                                     <div onClick={() => handleOpenEdit(equivalence)}>
-                                        <ButtonDetails/>
+                                        <ButtonDetails />
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ export const Equivalence = () => {
                     <p className="text-gray-400 text-center py-4 text-sm">No hay equivalencias disponibles.</p>
                 )}
             </div>
-            
+
             {selectedEquivalence && (
                 <OffCanvas
                     titlePrincipal="Actualizar la Equivalencia"
