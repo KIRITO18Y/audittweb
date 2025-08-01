@@ -3,83 +3,128 @@ import { MsgResponse } from "../../shared/model";
 import { GuideModel } from "./GuideModel";
 
 export const getGuide = async (): Promise<MsgResponse<GuideModel[]>> => {
-    const url = `api/guides`;
-    const response = await ApiClient.get<MsgResponse<GuideModel[]>>(url);
+	const url = `api/guides`;
+	const response = await ApiClient.get<MsgResponse<GuideModel[]>>(url);
 
-    if (response.status !== 200) {
-        return {
-            isSuccess: false,
-            message: "Error al obtener la guia",
-            isFailure: true,
-            error: {
-                code: response.status.toString(),
-                message: response.statusText,
-            },
-        };
-    }
+	if (response.status !== 200) {
+		return {
+			isSuccess: false,
+			message: "Error al obtener la guia",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
 
-    return response.data;
-}
+	return response.data;
+};
 
 export const createGuideServices = async (
-    model: GuideModel
+	model: GuideModel
 ): Promise<MsgResponse<GuideModel>> => {
-    const url = "api/guides";
-    const response = await ApiClient.post<MsgResponse<GuideModel>>(url, model);
+	const url = "api/guides";
+	const response = await ApiClient.post<MsgResponse<GuideModel>>(url, model);
 
-    if (response.status !== 200 && response.status !== 201) {
-        return {
-            isSuccess: false,
-            message: "Error al crear la guia",
-            isFailure: true,
-            error: {
-                code: response.status.toString(),
-                message: response.statusText,
-            },
-        };
-    }
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al crear la guia",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
 
-    return response.data;
+	return response.data;
 };
 
 export const updateGuideServices = async (
-    model: GuideModel
+	model: GuideModel
 ): Promise<MsgResponse<GuideModel>> => {
-    const url = "api/guides";
-    const response = await ApiClient.put<MsgResponse<GuideModel>>(url, model);
+	const url = "api/guides";
+	const response = await ApiClient.put<MsgResponse<GuideModel>>(url, model);
 
-    if (response.status !== 200 && response.status !== 201) {
-        return {
-            isSuccess: false,
-            message: "Error al actualizar la guia",
-            isFailure: true,
-            error: {
-                code: response.status.toString(),
-                message: response.statusText,
-            },
-        };
-    }
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al actualizar la guia",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
 
-    return response.data;
+	return response.data;
 };
 
 export const deleteGuideServices = async (
-    id: number
+	id: number
 ): Promise<MsgResponse<GuideModel>> => {
-    const url = `api/guides/${id}`;
-    const response = await ApiClient.delete<MsgResponse<GuideModel>>(url);
+	const url = `api/guides/${id}`;
+	const response = await ApiClient.delete<MsgResponse<GuideModel>>(url);
 
-    if (response.status !== 200 && response.status !== 201) {
-        return {
-            isSuccess: false,
-            message: "Error al eliminar la guia",
-            isFailure: true,
-            error: {
-                code: response.status.toString(),
-                message: response.statusText,
-            },
-        };
-    }
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al eliminar la guia",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
 
-    return response.data;
+	return response.data;
+};
+
+export const downloadGuideTemplateServices = async (): Promise<Blob> => {
+	const url = "api/guides/template";
+	const response = await ApiClient.get(url, {
+		responseType: "blob",
+	});
+
+	if (response.status !== 200) {
+		throw new Error("Error al descargar la plantilla");
+	}
+
+	return response.data;
+};
+
+export const importGuideServices = async (
+	file: File
+): Promise<MsgResponse<GuideModel[]>> => {
+	const formData = new FormData();
+	formData.append("file", file);
+
+	const url = "api/guides/import";
+	const response = await ApiClient.post<MsgResponse<GuideModel[]>>(
+		url,
+		formData,
+		{
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		}
+	);
+
+	if (response.status !== 200 && response.status !== 201) {
+		return {
+			isSuccess: false,
+			message: "Error al importar las guías",
+			isFailure: true,
+			error: {
+				code: response.status.toString(),
+				message: response.statusText,
+			},
+		};
+	}
+
+	return response.data;
 };

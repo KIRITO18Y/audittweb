@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { Bar } from "../../shared/components/Progress/Bar";
 import { GuideModel } from "./GuideModel";
 import { GuideUpdate } from "./GuideUpdate";
+import { GuideImport } from "./GuideImport";
 import { ButtonPlay } from "../../shared/components/Buttons/ButtonPlay";
 import { ButtonUpdate } from "../../shared/components/Buttons/ButtonDetail";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const Guide = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setUpdateVisible] = useState(false);
+    const [visibleImport, setVisibleImport] = useState(false);
     const { guides, queryGuide, deleteGuide } = useGuide();
     const [guide, setGuide] = useState<GuideModel>();
     const [searGuide, setSearGuide] = useState('');
@@ -74,6 +76,9 @@ export const Guide = () => {
                         <button onClick={() => setVisible(true)} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 rounded-lg font-semibold mb-5 mr-2">
                             Crear Instrumento
                         </button>
+                        <button onClick={() => setVisibleImport(true)} className="bg-green-600 hover:bg-green-700 text-white px-6 rounded-lg font-semibold mb-5">
+                            Importar Guías
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -105,6 +110,9 @@ export const Guide = () => {
                 </div>
                 <OffCanvas titlePrincipal="Crear Instrumentos" visible={visible} xClose={() => setVisible(false)} position={Direction.Right}>
                     <GuidesCreate />
+                </OffCanvas>
+                <OffCanvas titlePrincipal="Importar Guías y Preguntas" visible={visibleImport} xClose={() => setVisibleImport(false)} position={Direction.Right}>
+                    <GuideImport />
                 </OffCanvas>
                 {guide && (
                     <OffCanvas titlePrincipal="Detalle Instrumentos" visible={visibleUpdate} xClose={() => setUpdateVisible(false)} position={Direction.Right}>
