@@ -26,6 +26,7 @@ export const useAssessments = () => {
 		enabled:
 			client?.id != null &&
 			selectedDataCut != null &&
+			selectedDataCut !== 0 &&
 			selectedGuide != null &&
 			selectedGuide !== 0,
 	});
