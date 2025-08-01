@@ -20,25 +20,27 @@ export const ReportDashboard = () => {
     return (
         <div className="w-full">
             <div className="py-2">
-                <div className="flex space-x-4 mb-4 justify-center">
-                    <div className="flex flex-col  items-center bg-audittpurple text-white p-8 rounded-4xl text-2xl">
-                        <span>Adherencia Global</span>
-                        <span className="text-4xl font-bold">{reportGlobal?.globalAdherence}%</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <div className="flex flex-col items-center bg-audittpurple text-white p-6 sm:p-8 rounded-2xl text-center">
+                        <span className="text-lg sm:text-xl lg:text-2xl">Adherencia Global</span>
+                        <span className="text-3xl sm:text-4xl font-bold mt-2">{reportGlobal?.globalAdherence}%</span>
                     </div>
-                    <div className="flex flex-col items-center  bg-audittpink text-audittblack p-8 rounded-4xl text-2xl">
-                        <span>Adherencia Estricta</span>
-                        <span className="text-4xl font-bold">{reportGlobal?.strictAdherence}%</span>
+                    <div className="flex flex-col items-center bg-audittpink text-audittblack p-6 sm:p-8 rounded-2xl text-center">
+                        <span className="text-lg sm:text-xl lg:text-2xl">Adherencia Estricta</span>
+                        <span className="text-3xl sm:text-4xl font-bold mt-2">{reportGlobal?.strictAdherence}%</span>
                     </div>
-                    <div className="flex flex-col items-center  bg-audittprimary text-white p-8 rounded-4xl text-2xl">
-                        <span>Historias</span>
-                        <span className="text-4xl font-bold">{reportGlobal?.countHistories}</span>
+                    <div className="flex flex-col items-center bg-audittprimary text-white p-6 sm:p-8 rounded-2xl text-center">
+                        <span className="text-lg sm:text-xl lg:text-2xl">Historias</span>
+                        <span className="text-3xl sm:text-4xl font-bold mt-2">{reportGlobal?.countHistories}</span>
                     </div>
-                    <div className="flex flex-col gap-2 items-center bg-green-600 hover:bg-green-800 transition-all text-white p-8 rounded-4xl text-2xl cursor-pointer" onClick={() => handleDownload()}>
-                        <span>Reporte</span>
-                        <span className="text-2xl font-bold"><FontAwesomeIcon icon={faFileDownload} className="fa-2x" /></span>
+                    <div className="flex flex-col gap-2 items-center bg-green-600 hover:bg-green-800 transition-all text-white p-6 sm:p-8 rounded-2xl cursor-pointer text-center" onClick={() => handleDownload()}>
+                        <span className="text-lg sm:text-xl lg:text-2xl">Reporte</span>
+                        <span className="text-xl sm:text-2xl font-bold mt-2">
+                            <FontAwesomeIcon icon={faFileDownload} className="text-2xl sm:text-3xl" />
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -30,11 +30,13 @@ export const Users = () => {
     }
 
     return (
-        <div className="p-6">
-            <div className="flex space-x-8 text-lg font-medium mb-6 mr-2">
+        <div className="p-4 sm:p-6">
+            <div className="mb-6">
                 <LinkSettings />
             </div>
-            <div className="grid grid-cols-1 gap-4">
+            
+            {/* Desktop Layout */}
+            <div className="hidden lg:grid grid-cols-1 gap-4">
                 {users?.map((user) => (
                     <div
                         key={user.id}
@@ -74,6 +76,54 @@ export const Users = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Mobile Cards */}
+            <div className="lg:hidden space-y-4">
+                {users?.map((user) => (
+                    <div key={user.id} className="bg-white border border-gray-300 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="flex items-start space-x-4 mb-4">
+                            <img
+                                src={user.urlProfile}
+                                alt="avatar"
+                                className="w-16 h-16 rounded-full flex-shrink-0"
+                            />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="font-bold text-gray-900 uppercase text-sm truncate">
+                                    {user.firstName} {user.lastName}
+                                </h3>
+                                <p className="text-sm text-gray-500 truncate">{user.email}</p>
+                                <div className="flex items-center gap-2 mt-1">
+                                    <span className={`text-sm font-bold uppercase ${user.roleName === "ADMIN" ? "text-audittprimary" : "text-audittpurple"}`}>
+                                        {user.roleName}
+                                    </span>
+                                    <span className="text-sm font-semibold text-lime-600">
+                                        <UserStatusLabel idEstado={Number(user.idEstado)} />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex justify-end space-x-2 pt-2 border-t border-gray-100">
+                            {user.roleName !== "ADMIN" && (
+                                <button 
+                                    className="flex items-center justify-center w-10 h-10 rounded-full border border-blue-300 text-blue-900 hover:bg-blue-50 transition-colors"
+                                    onClick={() => handleVisibleInstitutions(user)}
+                                >
+                                    <FontAwesomeIcon icon={faBars} className="text-blue-400" />
+                                </button>
+                            )}
+
+                            <button 
+                                className="flex items-center justify-center w-10 h-10 rounded-full bg-green-200 text-green-600 hover:bg-green-300 transition-colors"
+                                onClick={() => handleClickDetail(user)}
+                            >
+                                <FontAwesomeIcon icon={faPen} />
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
             {user && (
                 <OffCanvas titlePrincipal='Actualizar Usuario' visible={visibleUpdate} xClose={() => setVisibleUpdate(false)} position={Direction.Right}>
                     <UserUpdate data={user} />

@@ -81,41 +81,39 @@ export const Roles = () => {
         return <Bar />
 
     return (
-        <div className="p-6">
-            <div>
-                <div className="flex space-x-8 text-lg font-medium mb-6 mr-2">
-                    <LinkSettings />
-                </div>
+        <div className="p-4 sm:p-6">
+            <div className="mb-6">
+                <LinkSettings />
             </div>
 
-            <form onSubmit={handleSubmit} ref={refForm} className="mb-4" >
+            <form onSubmit={handleSubmit} ref={refForm} className="mb-6 flex flex-col sm:flex-row gap-2">
                 <input
                     type="text"
                     name="name"
                     placeholder="Crear roles"
-                    className="shadow appearance-none border bg-white border-gray-300 rounded px-2 py-2 transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 mr-2" />
+                    className="flex-1 shadow appearance-none border bg-white border-gray-300 rounded px-3 py-2 transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                 <button
                     type="submit"
-                    className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer">
+                    className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer whitespace-nowrap">
                     Crear Roles
                 </button>
             </form>
 
-            <div>
-                <div>
-                    {roles?.map((role) => (
-                        <div key={role.id} className="w-96 p-4 mb-2 border rounded-lg shadow">
-                            <div className="flex items-center mb-2 mr-2">
-                                <div className="flex items-center ">
-                                    <ButtonPlays
-                                        xClick={() => togglePermissions(role.id ?? 0)}
-                                        isOpen={role.id !== undefined && openPermissionRoles.has(role.id)} />
-                                    <input
-                                        value={role.name}
-                                        readOnly
-                                        className="border rounded px-2 py-1 mr-2" />
-                                </div>
+            <div className="space-y-4">
+                {roles?.map((role) => (
+                    <div key={role.id} className="w-full max-w-2xl p-4 border rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                            <div className="flex items-center flex-1 gap-2">
+                                <ButtonPlays
+                                    xClick={() => togglePermissions(role.id ?? 0)}
+                                    isOpen={role.id !== undefined && openPermissionRoles.has(role.id)} />
+                                <input
+                                    value={role.name}
+                                    readOnly
+                                    className="flex-1 border rounded px-3 py-2 bg-gray-50 text-sm sm:text-base" />
+                            </div>
 
+                            <div className="flex gap-2 justify-end">
                                 <div onClick={() => handleEdit()}>
                                     <ButtonPlus />
                                 </div>
@@ -126,16 +124,18 @@ export const Roles = () => {
                                     )}
                                 </div>
                             </div>
-                            {role.id !== undefined && openPermissionRoles.has(role.id) && (
-                                <div className="mb-4">
-                                    <Permission />
-                                </div>
-                            )}
                         </div>
-                    ))}
-                </div>
+                        
+                        {role.id !== undefined && openPermissionRoles.has(role.id) && (
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                                <Permission />
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
-            <OffCanvas titlePrincipal='Crear Permisos' visible={visible} xClose={handleClose} position={Direction.Right}  >
+            
+            <OffCanvas titlePrincipal='Crear Permisos' visible={visible} xClose={handleClose} position={Direction.Right}>
                 <PermissionCreate />
             </OffCanvas>
         </div>

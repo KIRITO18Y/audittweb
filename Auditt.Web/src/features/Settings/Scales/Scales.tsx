@@ -79,53 +79,70 @@ export const Scales = () => {
         return <Bar/>
 
     return (
-        <div className="p-6">
-            <div className="flex space-x-8 text-lg font-medium mb-6 mr-2">
+        <div className="p-4 md:p-6">
+            {/* Header Navigation */}
+            <div className="flex flex-wrap gap-2 text-base md:text-lg font-medium mb-4 md:mb-6">
                 <LinkSettings/>
             </div>
 
-            <form onSubmit={handleSubmit} ref={refForm} className="mb-4">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Crear la escala"
-                    className="shadow appearance-none bg-white border border-gray-300 rounded px-2 py-2 transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 mr-2" />
-                <button
-                    type="submit"
-                    className="bg-[#392F5A] hover:bg-indigo-900  text-white px-4 py-2 rounded-lg font-semibold cursor-pointer">
-                    Crear Escala
-                </button>
+            {/* Create Scale Form */}
+            <form onSubmit={handleSubmit} ref={refForm} className="mb-6">
+                <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Crear la escala"
+                        className="flex-1 shadow appearance-none bg-white border border-gray-300 rounded px-3 py-2 text-sm md:text-base transition duration-200 hover:border-indigo-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                    />
+                    <button
+                        type="submit"
+                        className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer text-sm md:text-base whitespace-nowrap">
+                        Crear Escala
+                    </button>
+                </div>
             </form>
 
-            {scales?.map((scale) => (
-                <div key={scale.id} className="w-96 p-4 mb-4 border rounded-lg shadow">
-                    <div className="flex items-center mb-2 mr-2">
-                        <div className="flex items-center ">
-                            <ButtonPlays xClick={() => toggleScale(scale.id ?? 0)}
-                                isOpen={scale.id !== undefined && openScale.has(scale.id)}/>
-                            <input
-                                value={scale.name}
-                                readOnly
-                                className="border rounded px-2 py-1 mr-2"/>
+            {/* Scales Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                {scales?.map((scale) => (
+                    <div key={scale.id} className="w-full max-w-md p-4 border rounded-lg shadow bg-white">
+                        {/* Scale Header */}
+                        <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center flex-1 min-w-0">
+                                <ButtonPlays 
+                                    xClick={() => toggleScale(scale.id ?? 0)}
+                                    isOpen={scale.id !== undefined && openScale.has(scale.id)}
+                                />
+                                <input
+                                    value={scale.name}
+                                    readOnly
+                                    className="border rounded px-2 py-1 mx-2 flex-1 min-w-0 text-sm md:text-base bg-gray-50"
+                                />
+                            </div>
+                            
+                            {/* Action Buttons */}
+                            <div className="flex items-center gap-1 flex-shrink-0">
+                                <div onClick={() => handleEdit(scale.id ?? 0)}>
+                                    <ButtonPlus />
+                                </div>
+                                {typeof scale.id === 'number' && (
+                                    <ButtonDelete id={scale.id} onDelete={handleDelete} />
+                                )}
+                            </div>
                         </div>
-                        <div onClick={() => handleEdit(scale.id ?? 0)}>
-                            <ButtonPlus />
-                        </div>
-                        {typeof scale.id === 'number' && (
-                            <ButtonDelete id={scale.id} onDelete={handleDelete} />
+                        
+                        {/* Expandable Equivalence Section */}
+                        {scale.id !== undefined && openScale.has(scale.id) && (
+                            <div className="mt-4 border-t pt-4">
+                                <Equivalence/>
+                            </div>
                         )}
                     </div>
-                   {
-                    scale.id !== undefined && openScale.has(scale.id) &&  (
+                ))}
+            </div>
 
-                    <div className="mb-4">
-                        <Equivalence/>
-                    </div>
-                    )
-                   }
-                </div>
-            ))}
-            <OffCanvas titlePrincipal='Crear Equivalencia' visible={visible} xClose={handleClose} position={Direction.Right}  >
+            {/* OffCanvas Modal */}
+            <OffCanvas titlePrincipal='Crear Equivalencia' visible={visible} xClose={handleClose} position={Direction.Right}>
                 <EquivalenceCreate scaleId={scaleId} />
             </OffCanvas>
         </div>

@@ -40,32 +40,52 @@ export const Equivalence = () => {
     };
 
     return (
-        <div className="space-y-4">
-            <div className="pl-8 space-y-1 text-sm font-bold">
+        <div className="space-y-3">
+            <div className="space-y-2">
                 {equivalences?.length ? (
                     equivalences.map((equivalence) => (
-                        <div key={equivalence.id} className="flex mb-3 items-center">
-                            <label className="font-semibold mr-1">{equivalence.name}</label>
-                            <span className="text-red-500 mr-2">Value: {equivalence.value}</span>
-                            <ButtonDeletes id={equivalence.id} onDelete={handleDelete} />
-                            <div onClick={() => handleOpenEdit(equivalence)}>
-                                <ButtonDetails/>
+                        <div key={equivalence.id} className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 bg-gray-50 rounded-lg border">
+                            {/* Mobile Layout */}
+                            <div className="sm:hidden">
+                                <div className="flex flex-col space-y-1">
+                                    <div className="font-semibold text-sm">{equivalence.name}</div>
+                                    <div className="text-red-500 text-sm">Value: {equivalence.value}</div>
+                                    <div className="flex gap-2 mt-2">
+                                        <ButtonDeletes id={equivalence.id} onDelete={handleDelete} />
+                                        <div onClick={() => handleOpenEdit(equivalence)}>
+                                            <ButtonDetails/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Desktop Layout */}
+                            <div className="hidden sm:flex sm:items-center sm:w-full">
+                                <label className="font-semibold mr-3 flex-shrink-0 text-sm">{equivalence.name}</label>
+                                <span className="text-red-500 mr-3 flex-shrink-0 text-sm">Value: {equivalence.value}</span>
+                                <div className="flex gap-1 ml-auto">
+                                    <ButtonDeletes id={equivalence.id} onDelete={handleDelete} />
+                                    <div onClick={() => handleOpenEdit(equivalence)}>
+                                        <ButtonDetails/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p className="text-gray-400">No hay equivalencias disponibles.</p>
+                    <p className="text-gray-400 text-center py-4 text-sm">No hay equivalencias disponibles.</p>
                 )}
             </div>
+            
             {selectedEquivalence && (
-            <OffCanvas
-                titlePrincipal="Actualizar la Equivalencia"
-                visible={visible}
-                xClose={handleClose}
-                position={Direction.Right}
-            >
-                <EquivalenceUpdate data={selectedEquivalence} />
-            </OffCanvas>
+                <OffCanvas
+                    titlePrincipal="Actualizar la Equivalencia"
+                    visible={visible}
+                    xClose={handleClose}
+                    position={Direction.Right}
+                >
+                    <EquivalenceUpdate data={selectedEquivalence} />
+                </OffCanvas>
             )}
         </div>
     );

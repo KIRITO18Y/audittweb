@@ -168,23 +168,21 @@ export const AssessmentCreate = () => {
     }
 
     return (
-        <div className="w-full">
-
-            <div className="flex py-2">
-                <h1 className="text-2xl font-semibold mb-2">Medición de Adherencia</h1>
-
+        <div className="w-full p-4 md:p-6">
+            <div className="flex py-2 mb-4">
+                <h1 className="text-xl md:text-2xl font-semibold">Medición de Adherencia</h1>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-                <div className="p-1">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="flex flex-col space-x-4 mb-4">
-                            <span className="font-medium">Corte de Auditoria</span>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col space-y-2">
+                            <span className="font-medium text-sm md:text-base">Corte de Auditoria</span>
                             <DataCutSelect className="w-full" xChange={handleChangeDataCut} isSearchable={true} />
                         </div>
-                        <div className="flex flex-col space-x-4 mb-4">
-                            <span className="font-medium">Instrumento de adherencia a GPC</span>
+                        <div className="flex flex-col space-y-2">
+                            <span className="font-medium text-sm md:text-base">Instrumento de adherencia a GPC</span>
                             <GuideSelect className="w-full" xChange={handleChangeGuide} isSearchable={true} />
-
                         </div>
                     </div>
 

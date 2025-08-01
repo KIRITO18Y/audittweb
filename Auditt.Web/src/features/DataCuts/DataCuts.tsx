@@ -68,47 +68,50 @@ export const DataCuts = () => {
         `${item.name} `.toLocaleLowerCase().includes(searDataCuts.toLowerCase()))
 
     return (
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8">
             <div>
-                <div className="flex items-center space-x-4 mb-4">
-                    <span className="font-medium">IPS</span>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                    <span className="font-medium text-sm sm:text-base">IPS</span>
                     <ClientSelect
-                        className="w-lg"
+                        className="w-full sm:w-auto min-w-48"
                         selectedValue={selectedClient}
                         xChange={handleChangeClient}
                         isSearchable={true}
                     />
                 </div>
             </div>
-            <div className="flex justify-between">
-                <h1 className="text-2xl mr-2 font-semibold mb-3">Cortes trimestrales de auditoría</h1>
+            
+            <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-6">
+                <h1 className="text-xl sm:text-2xl font-semibold">Cortes trimestrales de auditoría</h1>
 
-                <div className="flex">
-                    <div className="relative mr-2"  >
-                        <div className=" inline-flex mb-5">
+                <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+                    <div className="relative">
+                        <div className="inline-flex w-full sm:w-auto">
                             <input type="text"
                                 value={searDataCuts}
                                 onChange={(e) => setSearDataCuts(e.target.value)}
                                 placeholder="Buscar Trimestrales"
-                                className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
+                                className="w-full sm:w-auto border rounded bg-white px-3 py-2 transition duration-200 border-gray-300 hover:border-indigo-500 
                                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-3 text-gray-400" />
                         </div>
                     </div>
                     <button
                         onClick={handleCreateClick}
-                        className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-1 rounded-lg font-semibold mb-5 mr-2">
+                        className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 py-2 rounded-lg font-semibold text-sm sm:text-base">
                         Crear Cortes
                     </button>
                 </div>
             </div>
-            <div>
+
+            {/* Desktop Table */}
+            <div className="hidden lg:block">
                 <div className="grid grid-cols-5">
                     <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Nombre</div>
                     <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Max Historias</div>
                     <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Fecha Inicial</div>
                     <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Fecha Final</div>
-                    <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center"></div>
+                    <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
                 </div>
                 <div className="bg-white px-2 py-2 border border-gray-200">
                     {filteredDataCut?.map((item) => (
@@ -126,15 +129,49 @@ export const DataCuts = () => {
                         </div>
                     ))}
                 </div>
-                <OffCanvas
-                    titlePrincipal="Crear Cortes Trimestrales" visible={visibleCreate} xClose={() => setVisibleCreate(false)} position={Direction.Right}>
-                    <DataCutCreateForm idInstitution={selectedClient?.value ?? "0"} />
-                </OffCanvas>
-                <OffCanvas
-                    titlePrincipal="Actualizar Cortes" visible={visibleUpdate} xClose={() => { setVisibleUpdate(false); setSelectedDataCut(null); }} position={Direction.Right}>
-                    <DataCutUpdateForm dataCut={selectedDataCut} />
-                </OffCanvas>
             </div>
+
+            {/* Mobile Cards */}
+            <div className="lg:hidden space-y-4">
+                {filteredDataCut?.map((item) => (
+                    <div key={item.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                            <h3 className="font-semibold text-lg text-gray-900 mb-2">{item.name}</h3>
+                        </div>
+                        
+                        <div className="space-y-3 mb-4">
+                            <div className="flex justify-between">
+                                <span className="text-sm font-medium text-gray-500">Max Historias:</span>
+                                <span className="text-sm font-semibold text-gray-900">{item.maxHistory}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="text-sm font-medium text-gray-500">Fecha Inicial:</span>
+                                <span className="text-sm text-gray-900">{format(item.initialDate, 'dd/MM/yyyy')}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="text-sm font-medium text-gray-500">Fecha Final:</span>
+                                <span className="text-sm text-gray-900">{format(item.finalDate, 'dd/MM/yyyy')}</span>
+                            </div>
+                        </div>
+                        
+                        <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
+                            <div onClick={() => handleUpdateClick(item)}>
+                                <ButtonUpdate />
+                            </div>
+                            <ButtonDelete id={item.id ?? 0} onDelete={handleDelete} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <OffCanvas
+                titlePrincipal="Crear Cortes Trimestrales" visible={visibleCreate} xClose={() => setVisibleCreate(false)} position={Direction.Right}>
+                <DataCutCreateForm idInstitution={selectedClient?.value ?? "0"} />
+            </OffCanvas>
+            <OffCanvas
+                titlePrincipal="Actualizar Cortes" visible={visibleUpdate} xClose={() => { setVisibleUpdate(false); setSelectedDataCut(null); }} position={Direction.Right}>
+                <DataCutUpdateForm dataCut={selectedDataCut} />
+            </OffCanvas>
         </div>
     );
 };
