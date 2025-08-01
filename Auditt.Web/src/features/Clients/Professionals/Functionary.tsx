@@ -91,16 +91,19 @@ export const Functionary = () => {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
                             </div>
                         </div>
-                        <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
-                            Crear Profesional
-                        </button>
-                        <button onClick={() => setVisibleImport(true)} className="cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
-                            Importar
-                        </button>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                            <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Crear Profesional
+                            </button>
+                            <button onClick={() => setVisibleImport(true)} className="cursor-pointer bg-green-600 hover:bg-green-700 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Importar
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div>
+                {/* Desktop Table */}
+                <div className="hidden lg:block">
                     <div className="grid grid-cols-4 w-full">
                         <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Nombres</div>
                         <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Apellidos</div>
@@ -110,11 +113,11 @@ export const Functionary = () => {
 
                     <div className="bg-white px-2 py-2 border border-gray-200">
                         {filteredFunctionnarys?.map((functionary) => (
-                            <div className="grid grid-cols-4 w-full hover:bg-[#F4EDEE] transition-colors">
+                            <div key={functionary.id} className="grid grid-cols-4 w-full hover:bg-[#F4EDEE] transition-colors">
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{functionary.firstName}</div>
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{functionary.lastName}</div>
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{functionary.identification}</div>
-                                <div className="flex justify-center text-sm px-2 b text-center border border-gray-300 py-1">
+                                <div className="flex justify-center text-sm px-2 text-center border border-gray-300 py-1">
                                     <div onClick={() => handleClickDetail(functionary)}>
                                         <ButtonUpdate />
                                     </div>
@@ -124,8 +127,37 @@ export const Functionary = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Mobile Cards */}
+                <div className="lg:hidden space-y-4">
+                    {filteredFunctionnarys?.map((functionary) => (
+                        <div key={functionary.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="space-y-3 mb-4">
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">Nombres:</span>
+                                    <span className="text-sm font-semibold text-gray-900">{functionary.firstName}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">Apellidos:</span>
+                                    <span className="text-sm text-gray-900">{functionary.lastName}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">Identificación:</span>
+                                    <span className="text-sm text-gray-900">{functionary.identification}</span>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
+                                <div onClick={() => handleClickDetail(functionary)}>
+                                    <ButtonUpdate />
+                                </div>
+                                <ButtonDelete id={functionary.id ?? 0} onDelete={handleDelete} />
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <OffCanvas titlePrincipal='Crear Profesionales' visible={visible} xClose={handleClose} position={Direction.Right}  >
+            <OffCanvas titlePrincipal='Crear Profesionales' visible={visible} xClose={handleClose} position={Direction.Right}>
                 <FunctionaryCreate />
             </OffCanvas>
             {

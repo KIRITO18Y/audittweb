@@ -99,44 +99,48 @@ export const Clients = () => {
                     <LinkClients />
                 </div>
 
-                <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mb-3 mr-2">Clientes o Instituciones</h2>
-                    <div className="flex">
-                        <div className="relative mr-4">
-                            <div className="inline-flex">
+                <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-6">
+                    <h2 className="text-xl sm:text-2xl font-semibold">Clientes o Instituciones</h2>
+                    <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+                        <div className="relative">
+                            <div className="inline-flex w-full sm:w-auto">
                                 <input type="text"
                                     value={searClients}
                                     onChange={(e) => setSearClients(e.target.value)}
                                     placeholder="Buscar Cliente"
-                                    className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
+                                    className="w-full sm:w-auto border rounded bg-white px-3 py-2 transition duration-200 border-gray-300 hover:border-indigo-500 
                                  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
+                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-3 text-gray-400" />
                             </div>
                         </div>
-                        <button onClick={() => setVisible(true)} className=" cursor-pointer bg-[#392f5a] cursor-por hover:bg-indigo-900 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
-                            Crear Cliente
-                        </button>
-                        <button onClick={() => setVisibleImport(true)} className=" cursor-pointer bg-green-600 hover:bg-green-700 text-white px-5 rounded-lg font-semibold mb-3 mr-2">
-                            Importar
-                        </button>
+                        <div className="flex gap-2">
+                            <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392f5a] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Crear Cliente
+                            </button>
+                            <button onClick={() => setVisibleImport(true)} className="cursor-pointer bg-green-600 hover:bg-green-700 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Importar
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div>
+
+                {/* Desktop Table */}
+                <div className="hidden lg:block">
                     <div className="grid grid-cols-5">
-                        <div className=" font-semibold bg-gray-300  text-gray-800 px-2 py-1 text-center">Razón Social</div>
-                        <div className=" font-semibold bg-gray-300  text-gray-800 px-2 py-1 text-center">Abreviatura</div>
-                        <div className=" font-semibold bg-gray-300  text-gray-800 px-2 py-1 text-center">NIT</div>
-                        <div className=" font-semibold bg-gray-300  text-gray-800 px-2 py-1 text-center">Ciudad</div>
-                        <div className=" font-semibold bg-gray-300  text-gray-800 px-2 py-1 text-center">Opciones</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Razón Social</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Abreviatura</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">NIT</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Ciudad</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
                     </div>
-                    <div className=" bg-white px-2 py-2 border border-gray-200">
+                    <div className="bg-white px-2 py-2 border border-gray-200">
                         {filteredClient?.map((client) => (
                             <div key={client.id} className="grid grid-cols-5 hover:bg-[#F4EDEE] transition-colors">
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{client.name}</div>
-                                <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.abbreviation}</div>
-                                <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.nit}</div>
-                                <div className=" text-sm px-2 py-2 border border-gray-300 text-center">{client.city} - {client.id}</div>
-                                <div className="flex justify-center text-sm px-2  border border-gray-300 py-1 ">
+                                <div className="text-sm px-2 py-2 border border-gray-300 text-center">{client.abbreviation}</div>
+                                <div className="text-sm px-2 py-2 border border-gray-300 text-center">{client.nit}</div>
+                                <div className="text-sm px-2 py-2 border border-gray-300 text-center">{client.city} - {client.id}</div>
+                                <div className="flex justify-center text-sm px-2 border border-gray-300 py-1">
                                     <label className="inline-flex items-center cursor-pointer pr-2">
                                         <input id="statudId" type="checkbox" checked={client.idState === 1} className="sr-only peer" onChange={e => handleUpdateStatus(client.id ?? 0, e.target.checked)} />
                                         <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
@@ -146,13 +150,53 @@ export const Clients = () => {
                                         <ButtonUpdate />
                                     </div>
                                     <ButtonDelete id={client.id ?? 0} onDelete={handleDelete} />
-
-
-
                                 </div>
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Mobile Cards */}
+                <div className="lg:hidden space-y-4">
+                    {filteredClient?.map((client) => (
+                        <div key={client.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start mb-3">
+                                <h3 className="font-semibold text-lg text-gray-900 line-clamp-2">{client.name}</h3>
+                                <label className="inline-flex items-center cursor-pointer">
+                                    <input
+                                        id={`status-${client.id}`}
+                                        type="checkbox"
+                                        checked={client.idState === 1}
+                                        className="sr-only peer"
+                                        onChange={e => handleUpdateStatus(client.id ?? 0, e.target.checked)}
+                                    />
+                                    <div className="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+
+                            <div className="space-y-2 mb-4">
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">Abreviatura:</span>
+                                    <span className="text-sm text-gray-900">{client.abbreviation}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">NIT:</span>
+                                    <span className="text-sm text-gray-900">{client.nit}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm font-medium text-gray-500">Ciudad:</span>
+                                    <span className="text-sm text-gray-900">{client.city}</span>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
+                                <div onClick={() => handleClickDetail(client)}>
+                                    <ButtonUpdate />
+                                </div>
+                                <ButtonDelete id={client.id ?? 0} onDelete={handleDelete} />
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <OffCanvas titlePrincipal='Crear Cliente' visible={visible} xClose={() => setVisible(false)} position={Direction.Right}>
                     <ClientCreate />

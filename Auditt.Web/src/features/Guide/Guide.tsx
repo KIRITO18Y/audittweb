@@ -73,25 +73,28 @@ export const Guide = () => {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 mr-2 text-gray-400" />
                             </div>
                         </div>
-                        <button onClick={() => setVisible(true)} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 rounded-lg font-semibold mb-5 mr-2">
-                            Crear Instrumento
-                        </button>
-                        <button onClick={() => setVisibleImport(true)} className="bg-green-600 hover:bg-green-700 text-white px-6 rounded-lg font-semibold mb-5">
-                            Importar Guías
-                        </button>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                            <button onClick={() => setVisible(true)} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Crear Instrumento
+                            </button>
+                            <button onClick={() => setVisibleImport(true)} className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                                Importar Guías
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div>
+
+                {/* Desktop Table */}
+                <div className="hidden lg:block">
                     <div className="grid grid-cols-4">
-                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Nombre</div>
-                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Descripción</div>
-                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Preguntas</div>
-                        <div className=" font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Nombre</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Descripción</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Preguntas</div>
+                        <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
                     </div>
                     <div className="bg-white px-2 py-2 border border-gray-200">
                         {filterdGuide?.map((guide) => (
-                            <div className="grid grid-cols-4 hover:bg-[#F4EDEE] transition-colorsl"
-                                key={guide.id}>
+                            <div className="grid grid-cols-4 hover:bg-[#F4EDEE] transition-colors" key={guide.id}>
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{guide.name}</div>
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{guide.description}</div>
                                 <div className="text-sm px-2 py-2 border border-gray-300 text-center">{guide.questionsCount}</div>
@@ -108,6 +111,38 @@ export const Guide = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Mobile Cards */}
+                <div className="lg:hidden space-y-4">
+                    {filterdGuide?.map((guide) => (
+                        <div key={guide.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="mb-4">
+                                <h3 className="font-semibold text-lg text-gray-900 mb-2">{guide.name}</h3>
+                                <p className="text-sm text-gray-600 line-clamp-2">{guide.description}</p>
+                            </div>
+
+                            <div className="flex justify-between items-center mb-4">
+                                <div className="flex items-center">
+                                    <span className="text-sm font-medium text-gray-500">Preguntas:</span>
+                                    <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                                        {guide.questionsCount}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
+                                <div onClick={() => handleGuideDetail(guide)}>
+                                    <ButtonUpdate />
+                                </div>
+                                <div>
+                                    <ButtonPlay url={"Questions"} />
+                                </div>
+                                <ButtonDelete id={guide.id ?? 0} onDelete={handleDelete} />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
                 <OffCanvas titlePrincipal="Crear Instrumentos" visible={visible} xClose={() => setVisible(false)} position={Direction.Right}>
                     <GuidesCreate />
                 </OffCanvas>
