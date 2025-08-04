@@ -59,8 +59,8 @@ export const Guide = () => {
     return (
         <div className="p-6 w-full">
             <div>
-                <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mr-2 mb-5 ">Instrumentos o Guías</h2>
+                <div className="flex justify-between gap-4 mb-6">
+                    <h2 className="text-2xl font-semibold  ">Instrumentos o Guías</h2>
                     <div className="flex">
                         <div className="relative mr-4">
                             <div className=" inline-flex mr-2">

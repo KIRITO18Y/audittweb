@@ -63,9 +63,8 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
     }
 
     return (
-        <>
-            <div className="bg-whitefont-semibold mb-4 flex gap-4">
-                <h1 className=" text-2xl ">Evaluación de adherencia</h1>
+        <div>
+            <div className="bg-white font-semibold mb-4 flex gap-4">
 
                 <button
                     className="bg-[#392F5A] border-2 transition-all hover:bg-purple-950 text-white  px-6 py-2 rounded-lg font-semibold cursor-pointer"
@@ -80,6 +79,21 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
                     Eliminar
                 </button>
 
+                <div className="inline-flex space-x-2 rounded-lg overflow-hidden border border-gray-300 bg-white">
+                    <button
+                        className="px-4 py-2 font-semibold text-sm sm:text-base text-white bg-[#392F5A] hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                        onClick={handleSave}
+                    >
+                        Asignar valoración
+                    </button>
+                    <EquivalenceSelect
+                        idScale={idScale ?? 1}
+                        name="valorationLst"
+                        isDisabled={false}
+                        className="px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                </div>
+
 
                 {/* <button
                     className="border-[#392F5A] border-2 hover:bg-purple-100 transition-all hover:border-purple-950 text-[#392F5A]  px-6 py-2 rounded-lg font-semibold cursor-pointer"
@@ -93,10 +107,10 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
                 {values.map((valuation) => (
                     <div key={valuation.id} className="w-full bg-green-100 border-2 border-green-200 rounded-2xl p-4 flex justify-between items-center">
                         <h2>{valuation.text}</h2>
-                        <EquivalenceSelect idScale={idScale ?? 1} xChange={(x) => handleChange(x, valuation)} selectedValue={valuation.idEquivalence.toString()} name="idClient" isDisabled={false} />
+                        <EquivalenceSelect idScale={idScale ?? 1} xChange={(x) => handleChange(x, valuation)} selectedValue={valuation.idEquivalence.toString()} name="idValoration" isDisabled={false} />
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }

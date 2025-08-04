@@ -168,30 +168,25 @@ export const AssessmentCreate = () => {
     }
 
     return (
-        <div className="w-full p-4 md:p-6">
-            <div className="flex py-2 mb-4">
-                <h1 className="text-xl md:text-2xl font-semibold">Medición de Adherencia</h1>
-            </div>
+        <div className="w-full p-4 flex flex-col md:flex-row gap-4">
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-                <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex flex-col space-y-2">
-                            <span className="font-medium text-sm md:text-base">Corte de Auditoria</span>
-                            <DataCutSelect className="w-full" xChange={handleChangeDataCut} isSearchable={true} />
-                        </div>
-                        <div className="flex flex-col space-y-2">
-                            <span className="font-medium text-sm md:text-base">Instrumento de adherencia a GPC</span>
-                            <GuideSelect className="w-full" xChange={handleChangeGuide} isSearchable={true} />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col space-x-4 mb-4">
-                        <span className="font-medium">Profesional evaluado</span>
-                        <FunctionarySelect className="w-full" selectedValue={selectedFunctionary} xChange={handleChangeFunctionary} isSearchable={true} />
-                    </div>
-
+            <div className="flex flex-col">
+                <div className="flex mb-4">
+                    <h1 className="text-xl md:text-2xl ">Medición de Adherencia</h1>
                 </div>
+                <div className="flex flex-col mb-2">
+                    <span className="font-medium text-sm md:text-base">Corte de Auditoria</span>
+                    <DataCutSelect className="w-full" xChange={handleChangeDataCut} isSearchable={true} />
+                </div>
+                <div className="flex flex-col mb-2">
+                    <span className="font-medium text-sm md:text-base">Instrumento de adherencia a GPC</span>
+                    <GuideSelect className="w-full" xChange={handleChangeGuide} isSearchable={true} />
+                </div>
+                <div className="flex flex-col mb-2">
+                    <span className="font-medium">Profesional evaluado</span>
+                    <FunctionarySelect className="w-full" selectedValue={selectedFunctionary} xChange={handleChangeFunctionary} isSearchable={true} />
+                </div>
+
                 <div className=" bg-gray-200 rounded-2xl p-2">
 
                     <div className="flex flex-col space-y-4 p-1 bg-gray">
@@ -213,8 +208,8 @@ export const AssessmentCreate = () => {
                                 </button>
                             </form>
                         </div>
-                        <div className="flex">
-                            <div>
+                        <div className="flex justify-between gap-2">
+                            <div className="flex flex-col">
                                 <label htmlFor="licenseInput" className="font-medium mb-2">Edad</label>
                                 <input
                                     type="text"
@@ -223,10 +218,10 @@ export const AssessmentCreate = () => {
                                     onChange={handleChange}
                                     value={assessment?.yearOld}
                                     placeholder="Edad"
-                                    className="border disabled:bg-gray-200  bg-white border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="border disabled:bg-gray-200  bg-white border-gray-300 rounded-lg px-4 w-16 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 />
                             </div>
-                            <div>
+                            <div className="flex flex-col">
                                 <label htmlFor="licenseInput" className="font-medium mb-2">Fecha de Atención</label>
                                 <input
                                     type="date"
@@ -238,7 +233,7 @@ export const AssessmentCreate = () => {
                                     className="border disabled:bg-gray-200 bg-white border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 />
                             </div>
-                            <div>
+                            <div className="flex flex-col">
                                 <label htmlFor="licenseInput" className="font-medium mb-2">Eps</label>
                                 <input
                                     type="text"
