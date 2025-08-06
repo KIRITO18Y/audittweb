@@ -53,7 +53,7 @@ Adherencia Estricta(Adherencia global o no estricta) y Por Criterio`,
                     </div>
                     <div className="flex items-center">
                         <Link to={'/Assessments/Create'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold mb-2" >
-                            Ir a Indicadores e informes</Link>
+                            Ir a evaluaciones</Link>
                     </div>
                 </div>
             </div>

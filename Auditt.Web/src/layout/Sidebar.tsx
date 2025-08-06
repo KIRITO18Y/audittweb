@@ -1,4 +1,4 @@
-import { faHouse, faUser, faUsers, faGear, faClipboardCheck, faBoxesStacked, faLockOpen, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faUser, faGear, faClipboardCheck, faLockOpen, faBars, faTimes, faVial, faCalendarWeek, faRulerVertical } from '@fortawesome/free-solid-svg-icons';
 import { MenuItem } from './MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useUserContext from '../shared/context/useUserContext';
@@ -72,11 +72,12 @@ export const Sidebar = () => {
                      {isAdmin && (
                         <>
                            <MenuItem icon={faUser} path='/Clients' text='Clientes' />
-                           <MenuItem icon={faUsers} path='/Guide' text='Instrumentos' />
-                           <MenuItem icon={faBoxesStacked} path='/DataCuts' text='Cortes Trimestrales' />
+                           <MenuItem icon={faVial} path='/Guide' text='Instrumentos' />
+                           <MenuItem icon={faCalendarWeek} path='/DataCuts' text='Cortes Trimestrales' />
                         </>
                      )}
-                     <MenuItem icon={faClipboardCheck} path='/Assessments' text='Medición de Adherencia' />
+                     <MenuItem icon={faRulerVertical} path='/Assessments' text='Medición de Adherencia' />
+                     <MenuItem icon={faClipboardCheck} path='/Reports' text='Indicadores e informes' />
                      {isAdmin && <MenuItem icon={faGear} path='/Settings' text='Configuraciones' />}
                      <li
                         onClick={() => {

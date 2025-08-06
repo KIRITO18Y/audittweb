@@ -33,7 +33,7 @@ export const AssessmentDetail = () => {
                         Ir a Indicadores e informes</Link>
                 </div>
             </div>
-            <div className="bg-white">
+            <div className="bg-white  pb-24">
                 <AssessmentCreate />
             </div>
         </div>

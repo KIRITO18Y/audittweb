@@ -180,15 +180,20 @@ export const AssessmentCreate = () => {
                 </div>
                 <div className="flex flex-col mb-2">
                     <span className="font-medium text-sm md:text-base">Instrumento de adherencia a GPC</span>
-                    <GuideSelect className="w-full" xChange={handleChangeGuide} isSearchable={true} />
+                    <GuideSelect
+                        className="w-full"
+                        xChange={handleChangeGuide}
+                        isSearchable={true} />
                 </div>
                 <div className="flex flex-col mb-2">
                     <span className="font-medium">Profesional evaluado</span>
-                    <FunctionarySelect className="w-full" selectedValue={selectedFunctionary} xChange={handleChangeFunctionary} isSearchable={true} />
+                    <FunctionarySelect
+                        className="w-full"
+                        selectedValue={selectedFunctionary}
+                        xChange={handleChangeFunctionary}
+                        isSearchable={true} />
                 </div>
-
                 <div className=" bg-gray-200 rounded-2xl p-2">
-
                     <div className="flex flex-col space-y-4 p-1 bg-gray">
                         <div className="flex flex-col">
                             <label htmlFor="licenseInput" className="font-medium ">Id del Paciente</label>

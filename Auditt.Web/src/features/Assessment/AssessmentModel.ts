@@ -56,6 +56,7 @@ export interface ValuationModel {
 	idAssessment: number;
 	idEquivalence: number;
 	idQuestion: number;
+	isSelected?: boolean;
 }
 
 export interface AssessmentValuationsModel {
