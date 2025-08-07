@@ -23,8 +23,8 @@ export const Login = () => {
             {/* Left Section - Login Form */}
             <div className="w-full lg:w-1/2 min-h-1/2 bg-white flex flex-col justify-center items-center p-6 lg:p-8">
                <h1 className="text-4xl md:text-6xl lg:text-8xl text-center">
-                  <span className="text-[#FF677D] font-bold">Auditt</span>
-                  <span className="text-gray-800">Api</span>
+                  <span className="text-gray-800">Medic</span>
+                  <span className="text-[#FF677D] font-bold">Audit</span>
                </h1>
                <button
                   onClick={handleLogin}

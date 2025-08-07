@@ -24,7 +24,6 @@ export interface UserResponseModel {
 	idEstado: number;
 	urlProfile?: string;
 	idRol: number;
-	rolName?: string;
 }
 
 export interface CreateUserModel {

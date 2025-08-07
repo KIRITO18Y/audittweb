@@ -123,6 +123,7 @@ export const Assessments = () => {
                                 </div>
 
                                 <div className="flex justify-end pt-2 border-t border-gray-100">
+                                    <ButtonPlay url={`Create/${assessment.id?.toString()}`} />
                                     <ButtonDelete id={assessment.id} onDelete={handleDelete} />
                                 </div>
                             </div>
