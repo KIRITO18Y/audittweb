@@ -1,11 +1,11 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Option } from "../../shared/model";
 import { SingleValue } from "react-select";
 import { DataCutSelect } from "../DataCuts/DataCutsSelect";
 import { FunctionarySelect } from "../Clients/Professionals/FunctionarySelect";
 import { GuideSelect } from "../Guide/GuideSelect";
-import { useAssessmentByDocumentMutation, useAssessments, useSaveAssessment } from "./useAssessment";
+import { useAssessmentByDocumentMutation, useAssessmentById, useAssessments, useSaveAssessment } from "./useAssessment";
 import { usePatientByDocumentMutation } from "../Clients/Patients/UsePatients";
 import { parseISO, differenceInYears, format } from "date-fns";
 import { AssessmentDetailModel, AssessmentModel, AssessmentValuationsModel, ValuationModel } from "./AssessmentModel";
@@ -13,15 +13,23 @@ import { AssessmentValuations } from "./AssessmentValuations";
 import useUserContext from "../../shared/context/useUserContext";
 import { toast } from "react-toastify";
 import useAssessmentContext from "../../shared/context/useAssessmentContext";
+import { useParams } from "react-router-dom";
 
 export const AssessmentCreate = () => {
     const { client, user } = useUserContext();
-    const { selectedDataCut, selectedGuide } = useAssessmentContext();
+    const { Id } = useParams<{ Id: string }>();
+    const { assessment: dataAssigment } = useAssessmentById(Number(Id));
+    const { selectedDataCut, selectedGuide, setSelectedDataCut, setSelectedGuide } = useAssessmentContext();
     const { saveAssessment } = useSaveAssessment();
     const { createAssessment } = useAssessments();
+    const refFormPatient = useRef<HTMLFormElement>(null);
     const { getPatientByDocumentMutation } = usePatientByDocumentMutation();
     const { getAssessmentByDocumentMutation } = useAssessmentByDocumentMutation();
     const [assessment, setAssessment] = useState<AssessmentDetailModel | undefined>(undefined);
+    const [selectedFunctionary, setSelectedFunctionary] = useState<Option | undefined>(() => ({
+        value: "0",
+        label: "Seleccione un corte",
+    }));
 
     useEffect(() => {
         if (client?.id) {
@@ -29,18 +37,22 @@ export const AssessmentCreate = () => {
         }
     }, [client?.id]);
 
+    useEffect(() => {
+        if (dataAssigment) {
+            setAssessment(dataAssigment);
+            setSelectedDataCut(dataAssigment.idDataCut);
+            setSelectedGuide(dataAssigment.idGuide);
+            setSelectedFunctionary({
+                value: dataAssigment.idFunctionary.toString(),
+                label: dataAssigment.functionaryName,
+            });
+        }
+    }, [dataAssigment, setSelectedDataCut, setSelectedGuide, setSelectedFunctionary]);
+
     const selectedClient: Option | undefined = {
         value: client?.id?.toString(),
         label: client?.name,
     };
-
-
-
-    const [selectedFunctionary, setSelectedFunctionary] = useState<Option | undefined>(() => ({
-        value: "0",
-        label: "Seleccione un corte",
-    }));
-
 
     const handleChangeDataCut = () => {
         setAssessment(undefined);
@@ -51,13 +63,12 @@ export const AssessmentCreate = () => {
             value: newValue?.value,
             label: newValue?.label,
         });
-
         setAssessment(undefined);
     }
 
     const handleChangeGuide = () => {
-
         setAssessment(undefined);
+        refFormPatient.current?.reset();
     }
 
     const handlePatientFind = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -183,6 +194,7 @@ export const AssessmentCreate = () => {
                     <GuideSelect
                         className="w-full"
                         xChange={handleChangeGuide}
+
                         isSearchable={true} />
                 </div>
                 <div className="flex flex-col mb-2">
@@ -194,14 +206,15 @@ export const AssessmentCreate = () => {
                         isSearchable={true} />
                 </div>
                 <div className=" bg-gray-200 rounded-2xl p-2">
-                    <div className="flex flex-col space-y-4 p-1 bg-gray">
+                    <form onSubmit={handlePatientFind} ref={refFormPatient} className="flex flex-col space-y-4 p-1 bg-gray">
                         <div className="flex flex-col">
                             <label htmlFor="licenseInput" className="font-medium ">Id del Paciente</label>
-                            <form onSubmit={handlePatientFind} className="flex">
+                            <div className="flex">
                                 <input
                                     id="licenseInput"
                                     type="text"
                                     name="document"
+                                    defaultValue={assessment?.identification ?? ""}
                                     placeholder="Ingrese el número de identificación del paciente"
                                     className="border border-gray-300 bg-white rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 />
@@ -211,7 +224,7 @@ export const AssessmentCreate = () => {
                                 >
                                     {createAssessment.isPending ? "Generando..." : "Diligenciar"}
                                 </button>
-                            </form>
+                            </div>
                         </div>
                         <div className="flex justify-between gap-2">
                             <div className="flex flex-col">
@@ -251,7 +264,7 @@ export const AssessmentCreate = () => {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
             </div>

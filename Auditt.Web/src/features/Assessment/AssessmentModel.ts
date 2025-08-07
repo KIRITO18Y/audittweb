@@ -37,7 +37,9 @@ export interface AssessmentDetailModel {
 	id: number;
 	idDataCut: number;
 	idFunctionary: number;
+	functionaryName: string;
 	idPatient: number;
+	identification: string;
 	date: Date | string;
 	eps: string;
 	yearOld: string;
@@ -45,6 +47,8 @@ export interface AssessmentDetailModel {
 	idUserUpdate: number;
 	updateDate: string;
 	createDate: string;
+	idGuide: number;
+	guideName: string;
 	valuations: ValuationModel[];
 	idScale: number;
 }
