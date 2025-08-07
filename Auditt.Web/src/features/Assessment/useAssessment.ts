@@ -77,6 +77,7 @@ export const useAssessmentById = (id: number) => {
 	const queryAssessment = useQuery({
 		queryKey: ["Assessment", id],
 		queryFn: () => GetAssessmentById(id),
+		enabled: id !== 0 && !!id,
 	});
 	return { queryAssessment, assessment: queryAssessment.data?.data };
 };

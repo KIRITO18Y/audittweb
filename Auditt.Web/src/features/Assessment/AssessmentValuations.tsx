@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { Checkbox } from "../../shared/components/Forms/Checkbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { EmptyData } from "../../shared/components/Navigation/EmptyData";
 
 export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave }:
     {
@@ -27,7 +28,7 @@ export const AssessmentValuations = ({ valuations, idScale, idAssessment, xSave 
     }, [valuations]);
 
     if (!valuations) {
-        return <div>No se encontraron evaluaciones</div>
+        return <EmptyData message="No hay evaluaciones disponibles, intente diligenciar un nuevo paciente" theme="empty" />;
     }
 
     const handleChange = (newValue: HTMLSelectElement, valuation: ValuationModel) => {

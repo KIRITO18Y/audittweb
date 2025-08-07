@@ -103,7 +103,7 @@ export const Guide = () => {
                                         <ButtonUpdate />
                                     </div>
                                     <div>
-                                        <ButtonPlay url={"Questions"} />
+                                        <ButtonPlay url={guide.id?.toString() ?? ""} />
                                     </div>
                                     <ButtonDelete id={guide.id ?? 0} onDelete={handleDelete} />
                                 </div>

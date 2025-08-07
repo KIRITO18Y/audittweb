@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import { DataCutSelect } from "../DataCuts/DataCutsSelect";
 import { GuideSelect } from "../Guide/GuideSelect";
 import { format } from "date-fns";
+import ButtonDelete from "../../shared/components/Buttons/ButtonDelete";
+import { ButtonPlay } from "../../shared/components/Buttons/ButtonPlay";
 
 export const Assessments = () => {
     const { queryAssessments, assessments, deleteAssessment } = useAssessments();
@@ -86,19 +88,15 @@ export const Assessments = () => {
                             <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1">Fecha de Atención</div>
                             <div className="font-semibold bg-gray-300 text-gray-800 px-2 py-1 text-center">Opciones</div>
                         </div>
-                        <div className="bg-white px-2 py-2 border border-gray-200">
+                        <div className="bg-white px-2 py-2 border border-gray-200 [&_div]:hover:bg-[#F4EDEE] [&_div]bg-white">
                             {assessments?.map((assessment) => (
-                                <div key={assessment.id} className="grid grid-cols-4 hover:bg-[#F4EDEE] transition-colors">
-                                    <div className="text-sm bg-white px-2 py-2 border border-gray-300">{assessment.identificationPatient}</div>
-                                    <div className="text-sm bg-white px-2 py-2 border border-gray-300">{assessment.functionaryName}</div>
-                                    <div className="text-sm bg-white px-2 py-2 border border-gray-300">{format(assessment.date, "dd/MM/yyyy")}</div>
+                                <div key={assessment.id} className="grid grid-cols-4 ">
+                                    <div className="text-sm px-2 py-2 border border-gray-300">{assessment.identificationPatient}</div>
+                                    <div className="text-sm px-2 py-2 border border-gray-300">{assessment.functionaryName}</div>
+                                    <div className="text-sm px-2 py-2 border border-gray-300">{format(assessment.date, "dd/MM/yyyy")}</div>
                                     <div className="flex justify-center px-2 py-2 border border-gray-300">
-                                        <button
-                                            className="border-[#FF677D] border-2 hover:bg-[#ff677e88] transition-all text-[#921729c4] px-4 py-1 rounded-lg font-semibold cursor-pointer text-sm"
-                                            onClick={(e) => handleDelete(e, assessment.id)}
-                                        >
-                                            Eliminar
-                                        </button>
+                                        <ButtonPlay url={`Create/${assessment.id?.toString()}`} />
+                                        <ButtonDelete id={assessment.id} onDelete={handleDelete} />
                                     </div>
                                 </div>
                             ))}
@@ -125,12 +123,7 @@ export const Assessments = () => {
                                 </div>
 
                                 <div className="flex justify-end pt-2 border-t border-gray-100">
-                                    <button
-                                        className="border-[#FF677D] border-2 hover:bg-[#ff677e88] transition-all text-[#921729c4] px-4 py-2 rounded-lg font-semibold cursor-pointer text-sm"
-                                        onClick={(e) => handleDelete(e, assessment.id)}
-                                    >
-                                        Eliminar
-                                    </button>
+                                    <ButtonDelete id={assessment.id} onDelete={handleDelete} />
                                 </div>
                             </div>
                         ))}

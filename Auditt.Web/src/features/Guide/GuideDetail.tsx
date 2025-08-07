@@ -1,9 +1,10 @@
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Questions } from "./Questions/Questions";
 
 export const GuideDetail = () => {
+    const { id } = useParams<{ id: string }>();
     return (
         <div className="w-full">
             <div className="flex flex-col sm:flex-row gap-4 p-4">
@@ -17,7 +18,7 @@ export const GuideDetail = () => {
                 <h1 className="block text-xl sm:text-2xl font-semibold">Instrumento de Adherencia a GPC</h1>
             </div>
             <div className="w-full bg-white p-4 sm:p-6 rounded-lg mx-4">
-                <Questions />
+                <Questions id={Number(id)} />
             </div>
         </div>
     )

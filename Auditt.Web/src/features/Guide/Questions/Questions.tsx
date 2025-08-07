@@ -10,7 +10,7 @@ import { ButtonUpdate } from "../../../shared/components/Buttons/ButtonDetail";
 import { QuestionsModel } from "./QuestionsModel";
 import { QuestionsUpdate } from "./QuestiosUpdate";
 import ButtonDelete from "../../../shared/components/Buttons/ButtonDelete";
-export const Questions = () => {
+export const Questions = ({ id }: { id?: number }) => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
     const [questionSelected, setQuestionSelected] = useState<QuestionsModel | null>(null);
@@ -24,6 +24,12 @@ export const Questions = () => {
             setSelectedIdguide(guides[0]?.id ?? 0);
         }
     }, [guides, selectedIdguide]);
+
+    useEffect(() => {
+        if (id) {
+            setSelectedIdguide(id);
+        }
+    }, [id]);
 
     const selectedGuide = guides?.find((guide) => guide.id === selectedIdguide);
 
@@ -90,15 +96,15 @@ export const Questions = () => {
                         .map((question) => (
                             <div key={question.id} className="flex space-x-1 mb-4 w-full">
                                 <div className="bg-green-100 text-gray-900 p-2 rounded break-words whitespace-pre-wrap overflow-hidden w-full">
-                                   <div className="flex justify-between items-center ">
-                                    <div>{question.text}</div>
-                                    <div className="mt-2 flex space-x-2">
-                                        <ButtonDelete id={question.id ?? 0} onDelete={handleDelete} />
-                                        <div onClick={() => handleClickDetail(question)}>
-                                            <ButtonUpdate />
+                                    <div className="flex justify-between items-center ">
+                                        <div>{question.text}</div>
+                                        <div className="mt-2 flex space-x-2">
+                                            <ButtonDelete id={question.id ?? 0} onDelete={handleDelete} />
+                                            <div onClick={() => handleClickDetail(question)}>
+                                                <ButtonUpdate />
+                                            </div>
                                         </div>
                                     </div>
-                                   </div>
                                 </div>
                             </div>
                         ))}

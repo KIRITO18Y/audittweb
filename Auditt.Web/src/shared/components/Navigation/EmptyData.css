@@ -1,0 +1,42 @@
+/***
+Emty-Data
+***/
+.emty-data_content {
+	text-align: center;
+    width: 100%;
+}
+.emty-data {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--color-gray-200);
+	border-radius: 5px;
+	padding: 15px;
+	color: #ffffff;
+	margin: 2%;
+}
+
+.emty-data h3 {
+	margin: 0px;
+}
+
+.emty-data .emty-data_icon {
+	font-size: 5em;
+}
+
+.emty-data.emty-data_not-permit {
+	background-color: #ffbb7b;
+}
+
+.emty-data.emty-data_not-found {
+	background-color: #7bcaff;
+}
+
+.emty-data.emty-data_download {
+	background-color: #7bcaff;
+	max-width: 550px;
+}
+/***
+Fin Emty-Data
+***/
