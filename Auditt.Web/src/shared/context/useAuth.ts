@@ -36,5 +36,6 @@ export const useAuth = create<AuthStore>((set) => ({
 
 	logout: async () => {
 		set({ user: null });
+		set({ loading: true });
 	},
 }));

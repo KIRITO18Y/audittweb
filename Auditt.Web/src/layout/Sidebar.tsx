@@ -3,15 +3,26 @@ import { MenuItem } from './MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useUserContext from '../shared/context/useUserContext';
 import { useState } from 'react';
+import { useAuth } from '../shared/context/useAuth';
 
 export const Sidebar = () => {
    const urlApi = import.meta.env.VITE_API_URL;
-   const { user } = useUserContext();
+   const { user, setClient, setIsAuthenticated, setToken, setUser } = useUserContext();
+   const { logout } = useAuth();
    const isAdmin = user?.roleName === 'ADMIN';
    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
    const toggleMobileMenu = () => {
       setIsMobileMenuOpen(!isMobileMenuOpen);
+   };
+
+   const handleLogout = () => {
+      setClient(null);
+      setIsAuthenticated(false);
+      setUser(null);
+      setToken(null);
+      logout();
+      window.location.href = `${urlApi}api/auth/google-logout`;
    };
 
    return (
@@ -80,9 +91,7 @@ export const Sidebar = () => {
                      <MenuItem icon={faClipboardCheck} path='/Reports' text='Indicadores e informes' />
                      {isAdmin && <MenuItem icon={faGear} path='/Settings' text='Configuraciones' />}
                      <li
-                        onClick={() => {
-                           window.location.href = `${urlApi}api/auth/google-logout`;
-                        }}
+                        onClick={handleLogout}
                         className={`mt-1 cursor-pointer font-semibold text-gray-300 hover:bg-gray-700 px-4 py-2 flex items-center gap-2`}>
                         <FontAwesomeIcon
                            icon={faLockOpen}

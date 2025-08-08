@@ -10,11 +10,14 @@ Emty-Data
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--color-gray-200);
+	background-color: var(--color-gray-600);
 	border-radius: 5px;
 	padding: 15px;
 	color: #ffffff;
 	margin: 2%;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+	max-width: 500px;
+	text-align: justify;
 }
 
 .emty-data h3 {

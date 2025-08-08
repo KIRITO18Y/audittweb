@@ -12,7 +12,7 @@ export const Avatar = () => {
                     <span>{user?.firstName} {user?.lastName}</span>
                 </div>
                 <div className="shrink-0">
-                    <span>{user?.rolName}</span>
+                    <span>{user?.roleName}</span>
                 </div>
                 <div className="shrink-0">
                     <img

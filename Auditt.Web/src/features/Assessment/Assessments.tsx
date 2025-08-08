@@ -12,10 +12,12 @@ import { GuideSelect } from "../Guide/GuideSelect";
 import { format } from "date-fns";
 import ButtonDelete from "../../shared/components/Buttons/ButtonDelete";
 import { ButtonPlay } from "../../shared/components/Buttons/ButtonPlay";
+import { EmptyData } from "../../shared/components/Navigation/EmptyData";
 
 export const Assessments = () => {
     const { queryAssessments, assessments, deleteAssessment } = useAssessments();
     const { client } = useUserContext();
+    const [isEmptyClient, setIsEmptyClient] = useState(false);
     const [selectedClient, setSelectedClient] = useState<Option | undefined>(() => ({
         value: client?.id?.toString(),
         label: client?.name,
@@ -47,13 +49,16 @@ export const Assessments = () => {
         return <Bar />;
 
 
+    if (isEmptyClient) {
+        return <EmptyData message="No tienes clientes o instituciones asociadas o están inactivos por temas de licencia, contacta al administrador de la plataforma para obtener más información" />;
+    }
 
     return (
         <>
             <div className="flex flex-col lg:flex-row gap-4 p-4 lg:justify-between">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <span className="font-medium text-sm sm:text-base">IPS</span>
-                    <ClientSelect className="w-full sm:w-auto min-w-48" selectedValue={selectedClient} xChange={handleChangeClient} isSearchable={true} />
+                    <ClientSelect className="w-full sm:w-auto min-w-48" xEmpty={() => setIsEmptyClient(true)} selectedValue={selectedClient} xChange={handleChangeClient} isSearchable={true} />
                 </div>
                 <div className="flex items-center">
                     <Link to={'/Reports'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base text-center" >

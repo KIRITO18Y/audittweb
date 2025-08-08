@@ -8,7 +8,7 @@ export interface Option {
     label?: string;
 }
 
-export const ClientSelect = ({ selectedValue, name, className, xChange, required, isSearchable, isDisabled }: { selectedValue?: Option, name?: string, className?: string, xChange?: (newValue: SingleValue<Option>) => void, required?: boolean, isSearchable?: boolean, isDisabled?: boolean }) => {
+export const ClientSelect = ({ selectedValue, name, className, xChange, xEmpty, required, isSearchable, isDisabled }: { selectedValue?: Option, name?: string, className?: string, xChange?: (newValue: SingleValue<Option>) => void, xEmpty?: () => void, required?: boolean, isSearchable?: boolean, isDisabled?: boolean }) => {
     const { queryClients, clients } = useClient();
     const { client, setClient } = useUserContext();
 
@@ -17,6 +17,16 @@ export const ClientSelect = ({ selectedValue, name, className, xChange, required
             setClient(clients[0]);
         }
     }, [client, setClient, clients]);
+
+    useEffect(() => {
+        if (!queryClients.isLoading) {
+            if (!clients || clients.length === 0) {
+                if (xEmpty) {
+                    xEmpty();
+                }
+            }
+        }
+    }, [queryClients, clients, xEmpty]);
 
     const options: readonly Option[] | undefined = clients?.map((item) => ({
         value: item?.id?.toString(),

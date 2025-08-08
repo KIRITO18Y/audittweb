@@ -10,10 +10,10 @@ import Swal from "sweetalert2";
 import ButtonDelete from "../../../shared/components/Buttons/ButtonDelete";
 import { FunctionaryUpdate } from "./FunctionaryUpdate";
 import { ButtonUpdate } from "../../../shared/components/Buttons/ButtonDetail";
-import { faMagnifyingGlass, } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FunctionaryImport } from "./FunctionaryImport";
 import { useFileDownload } from "../../../shared/components/FilesDowload";
+import { TitlePrincipal } from "../../../shared/components/Text/TitlePrincipal";
+import { InputSearch } from "../../../shared/components/Forms/InputSearch";
 export const Functionary = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -72,25 +72,18 @@ export const Functionary = () => {
     return (
         <div className="w-full p-6">
             <div>
-                <div className="flex space-x-8 text-lg font-medium mb-4 mr-2">
+                <div className="flex space-x-8 text-lg font-medium mb-0 mr-2">
                     <LinkClients />
                 </div>
 
-                <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mb-3 mr-2">Profesionales </h2>
-
-                    <div className="flex">
-                        <div className="relative mr-4">
-                            <div className=" inline-flex">
-                                <input type="text"
-                                    value={searFunctionarys}
-                                    onChange={(e) => setSearFunctionarys(e.target.value)}
-                                    placeholder="Buscar Profesional"
-                                    className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
-                                 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
-                            </div>
-                        </div>
+                <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-2">
+                    <TitlePrincipal title="Profesionales" />
+                    <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+                        <InputSearch
+                            value={searFunctionarys}
+                            onChange={(e) => setSearFunctionarys(e.target.value)}
+                            placeholder="Buscar Profesional"
+                        />
                         <div className="flex flex-col sm:flex-row gap-2">
                             <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
                                 Crear Profesional

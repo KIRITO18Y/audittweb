@@ -11,9 +11,11 @@ import { ReportDashboard } from "./ReportDashboard";
 import { ReportList } from "./Common/ReportList";
 import { ReportGeneral } from "./ReportGeneral";
 import { ReportFunctionaries } from "./ReportFunctionaries";
+import { EmptyData } from "../../shared/components/Navigation/EmptyData";
 
 export const ReportContainer = () => {
     const { client } = useUserContext();
+    const [isEmptyClient, setIsEmptyClient] = useState(false);
     const REPORT_LIST = [
         {
             idReport: 1,
@@ -33,7 +35,9 @@ Adherencia Estricta(Adherencia global o no estricta) y Por Criterio`,
         label: client?.name,
     };
 
-
+    if (isEmptyClient) {
+        return <EmptyData message="No tienes clientes o instituciones asociadas o están inactivos por temas de licencia, contacta al administrador de la plataforma para obtener más información" />;
+    }
 
     return (
         <>
@@ -49,7 +53,7 @@ Adherencia Estricta(Adherencia global o no estricta) y Por Criterio`,
 
                     <div className="flex items-center space-x-4 mb-4">
                         <span className="font-medium">IPS</span>
-                        <ClientSelect className="w-lg" selectedValue={selectedClient} isSearchable={true} />
+                        <ClientSelect xEmpty={() => setIsEmptyClient(true)} className="w-lg" selectedValue={selectedClient} isSearchable={true} />
                     </div>
                     <div className="flex items-center">
                         <Link to={'/Assessments/Create'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold mb-2" >

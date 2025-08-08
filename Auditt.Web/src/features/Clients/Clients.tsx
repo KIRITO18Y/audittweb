@@ -11,12 +11,12 @@ import { ClientUpdate } from "./ClientUpdate";
 import { useClient } from "./useClient";
 import { LinkClients } from "../Dashboard/LinkClients";
 import { ButtonUpdate } from "../../shared/components/Buttons/ButtonDetail";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useFileDownload } from "../../shared/components/FilesDowload";
 import { ClientImport } from "./ClientImport";
 import { useQueryClient } from "@tanstack/react-query";
 import { MsgResponse } from "../../shared/model";
+import { TitlePrincipal } from "../../shared/components/Text/TitlePrincipal";
+import { InputSearch } from "../../shared/components/Forms/InputSearch";
 export const Clients = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -95,24 +95,18 @@ export const Clients = () => {
     return (
         <div className="p-6 w-full">
             <div>
-                <div className="flex space-x-8 text-lg font-medium mb-4 mr-2">
+                <div className="flex space-x-8 text-lg font-medium mb-0 mr-2">
                     <LinkClients />
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-6">
-                    <h2 className="text-xl sm:text-2xl font-semibold">Clientes o Instituciones</h2>
+                <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-2">
+                    <TitlePrincipal title="Clientes o Instituciones" />
                     <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
-                        <div className="relative">
-                            <div className="inline-flex w-full sm:w-auto">
-                                <input type="text"
-                                    value={searClients}
-                                    onChange={(e) => setSearClients(e.target.value)}
-                                    placeholder="Buscar Cliente"
-                                    className="w-full sm:w-auto border rounded bg-white px-3 py-2 transition duration-200 border-gray-300 hover:border-indigo-500 
-                                 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-3 text-gray-400" />
-                            </div>
-                        </div>
+                        <InputSearch
+                            value={searClients}
+                            onChange={(e) => setSearClients(e.target.value)}
+                            placeholder="Buscar Cliente"
+                        />
                         <div className="flex gap-2">
                             <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392f5a] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
                                 Crear Cliente

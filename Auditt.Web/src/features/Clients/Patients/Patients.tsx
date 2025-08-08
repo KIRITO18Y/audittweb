@@ -10,11 +10,11 @@ import { PatientsModel } from "./PantientsModel";
 import { PatientsUpdate } from "./PatientsUpdate";
 import { Bar } from "../../../shared/components/Progress/Bar";
 import { ButtonUpdate } from "../../../shared/components/Buttons/ButtonDetail";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { PatientsImport } from "./PatientsImport";
 import { useFileDownload } from "../../../shared/components/FilesDowload";
 import { format } from "date-fns";
+import { TitlePrincipal } from "../../../shared/components/Text/TitlePrincipal";
+import { InputSearch } from "../../../shared/components/Forms/InputSearch";
 export const Patients = () => {
     const [visible, setVisible] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -69,24 +69,18 @@ export const Patients = () => {
         <div className="w-full p-6">
             <div>
                 <div className="flex-1">
-                    <div className="flex space-x-8 text-lg font-medium mb-4 mr-2">
+                    <div className="flex space-x-8 text-lg font-medium mb-0 mr-2">
                         <LinkClients />
                     </div>
-                    <div className="flex justify-between">
-                        <h2 className="text-2xl font-semibold mb-3 mr-2">Pacientes o historias</h2>
-                        <div className="flex">
-                            <div className="relative mr-4">
-                                <div className=" inline-flex">
-                                    <input type="text"
-                                        value={searPantients}
-                                        onChange={(e) => setSearPantients(e.target.value)}
-                                        placeholder="Buscar Paciente"
-                                        className="border rounded bg-white px-3 py-1 transition duration-200 border-gray-300 hover:border-indigo-500 
-                                 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} className="fas fa-search absolute right-2 top-2 text-gray-400" />
-                                </div>
-                            </div>
-                            <button onClick={() => setVisible(true)} className="cursor-pointer mr-2 bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
+                    <div className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4 mb-2">
+                        <TitlePrincipal title="Pacientes o historias" />
+                        <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+                            <InputSearch
+                                value={searPantients}
+                                onChange={(e) => setSearPantients(e.target.value)}
+                                placeholder="Buscar Paciente"
+                            />
+                            <button onClick={() => setVisible(true)} className="cursor-pointer bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
                                 Crear Paciente
                             </button>
                             <button onClick={() => setVisibleImport(true)} className="cursor-pointer bg-green-600 hover:bg-green-700 text-white px-4 sm:px-5 py-2 rounded-lg font-semibold text-sm sm:text-base">
