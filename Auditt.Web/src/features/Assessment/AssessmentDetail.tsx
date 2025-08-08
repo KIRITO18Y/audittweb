@@ -3,14 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 import { AssessmentCreate } from "./AssessmentCreate"
 import { ClientSelect } from "../Clients/ClientSelect"
-import { Option } from "../../shared/model";
-import useUserContext from "../../shared/context/useUserContext"
 export const AssessmentDetail = () => {
-    const { client } = useUserContext();
-    const selectedClient: Option | undefined = {
-        value: client?.id?.toString(),
-        label: client?.name,
-    };
 
     return (
         <div className="w-full">
@@ -25,7 +18,7 @@ export const AssessmentDetail = () => {
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <span className="font-medium text-sm sm:text-base">IPS</span>
-                    <ClientSelect className="w-full sm:w-auto min-w-48" selectedValue={selectedClient} isSearchable={true} />
+                    <ClientSelect className="w-full sm:w-auto min-w-48" isSearchable={true} />
                 </div>
 
                 <div className="flex items-center">

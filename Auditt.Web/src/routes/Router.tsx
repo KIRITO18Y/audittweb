@@ -113,7 +113,7 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-                path: '/Users',
+                path: '/Settings',
                 element: (
                     <ProtectedRoute requiredRole="ADMIN">
                         <Users />
@@ -122,7 +122,7 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: '/Scales',
+                path: '/Settings/Scales',
                 element: (
                     <ProtectedRoute requiredRole="ADMIN">
                         <Scales />
@@ -131,7 +131,7 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: '/Roles',
+                path: '/Settings/Roles',
                 element: (
                     <ProtectedRoute requiredRole="ADMIN">
                         <Roles />

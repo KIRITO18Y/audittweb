@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { ClientSelect } from "../Clients/ClientSelect";
-import { Option } from "../../shared/model";
-import { SingleValue } from "react-select";
 import { Link } from "react-router-dom";
 import { useAssessments } from "./useAssessment";
 import { Bar } from "../../shared/components/Progress/Bar";
-import useUserContext from "../../shared/context/useUserContext";
 import Swal from "sweetalert2";
 import { DataCutSelect } from "../DataCuts/DataCutsSelect";
 import { GuideSelect } from "../Guide/GuideSelect";
@@ -16,19 +13,8 @@ import { EmptyData } from "../../shared/components/Navigation/EmptyData";
 
 export const Assessments = () => {
     const { queryAssessments, assessments, deleteAssessment } = useAssessments();
-    const { client } = useUserContext();
     const [isEmptyClient, setIsEmptyClient] = useState(false);
-    const [selectedClient, setSelectedClient] = useState<Option | undefined>(() => ({
-        value: client?.id?.toString(),
-        label: client?.name,
-    }));
 
-    const handleChangeClient = (newValue: SingleValue<Option>) => {
-        setSelectedClient({
-            value: newValue?.value,
-            label: newValue?.label,
-        });
-    }
     function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number): void {
         e.preventDefault();
         Swal.fire({
@@ -58,7 +44,7 @@ export const Assessments = () => {
             <div className="flex flex-col lg:flex-row gap-4 p-4 lg:justify-between">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <span className="font-medium text-sm sm:text-base">IPS</span>
-                    <ClientSelect className="w-full sm:w-auto min-w-48" xEmpty={() => setIsEmptyClient(true)} selectedValue={selectedClient} xChange={handleChangeClient} isSearchable={true} />
+                    <ClientSelect className="w-full sm:w-auto min-w-48" xEmpty={() => setIsEmptyClient(true)} isSearchable={true} />
                 </div>
                 <div className="flex items-center">
                     <Link to={'/Reports'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base text-center" >

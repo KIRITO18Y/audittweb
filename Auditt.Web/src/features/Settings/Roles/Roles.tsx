@@ -1,4 +1,4 @@
-import { LinkSettings } from "../../Dashboard/LinkSenttings";
+import { LinkSettings } from "../LinkSenttings";
 import { useRoles } from "./UseRoles";
 import { useEffect, useRef, useState } from "react";
 import { Bar } from "../../../shared/components/Progress/Bar";

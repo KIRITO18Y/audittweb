@@ -6,40 +6,26 @@ import { ButtonUpdate } from "../../shared/components/Buttons/ButtonDetail";
 import { useDataCuts } from "./useDataCuts";
 import { Bar } from "../../shared/components/Progress/Bar";
 import { ClientSelect } from "../Clients/ClientSelect";
-import { Option } from "../../shared/model";
-import { SingleValue } from "react-select";
 import ButtonDelete from "../../shared/components/Buttons/ButtonDelete";
 import Swal from "sweetalert2";
 import { DataCutUpdateForm } from "./DataCutUpdateForm";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useUserContext from "../../shared/context/useUserContext";
 import { DataCutModel } from "./DataCutModels";
 import { format } from "date-fns";
 
 export const DataCuts = () => {
-    const { client } = useUserContext();
     const [visibleCreate, setVisibleCreate] = useState(false);
     const [visibleUpdate, setVisibleUpdate] = useState(false);
     const [selectedDataCut, setSelectedDataCut] = useState<DataCutModel | null>(null);
     const { queryDataCuts, dataCuts, deleteDataCut } = useDataCuts();
     const [searDataCuts, setSearDataCuts] = useState('');
-    const [selectedClient, setSelectedClient] = useState<Option | undefined>(() => ({
-        value: client?.id?.toString(),
-        label: client?.name,
-    }));
 
 
     const handleCreateClick = () => {
         setVisibleCreate(true);
     };
 
-    const handleChangeClient = (newValue: SingleValue<Option>) => {
-        setSelectedClient({
-            value: newValue?.value,
-            label: newValue?.label,
-        });
-    };
 
     const handleUpdateClick = (item: DataCutModel) => {
         setSelectedDataCut(item);
@@ -74,8 +60,6 @@ export const DataCuts = () => {
                     <span className="font-medium text-sm sm:text-base">IPS</span>
                     <ClientSelect
                         className="w-full sm:w-auto min-w-48"
-                        selectedValue={selectedClient}
-                        xChange={handleChangeClient}
                         isSearchable={true}
                     />
                 </div>
@@ -161,12 +145,11 @@ export const DataCuts = () => {
                             <ButtonDelete id={item.id ?? 0} onDelete={handleDelete} />
                         </div>
                     </div>
-                ))}
-            </div>
+                ))}</div>
 
             <OffCanvas
                 titlePrincipal="Crear Cortes Trimestrales" visible={visibleCreate} xClose={() => setVisibleCreate(false)} position={Direction.Right}>
-                <DataCutCreateForm idInstitution={selectedClient?.value ?? "0"} />
+                <DataCutCreateForm />
             </OffCanvas>
             <OffCanvas
                 titlePrincipal="Actualizar Cortes" visible={visibleUpdate} xClose={() => { setVisibleUpdate(false); setSelectedDataCut(null); }} position={Direction.Right}>

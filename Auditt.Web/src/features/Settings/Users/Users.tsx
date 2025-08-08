@@ -1,6 +1,6 @@
 import { useState } from "react";
 import OffCanvas from "../../../shared/components/OffCanvas/Index";
-import { LinkSettings } from "../../Dashboard/LinkSenttings";
+import { LinkSettings } from "../LinkSenttings";
 import { Direction } from "../../../shared/components/OffCanvas/Models";
 import { useUser } from "./useUser";
 import { UserUpdate } from "./UserUpdate";

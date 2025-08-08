@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ButtonPlus } from "../../../shared/components/Buttons/ButtonMas";
-import { LinkSettings } from "../../Dashboard/LinkSenttings";
+import { LinkSettings } from "../LinkSenttings";
 import { useScales } from "./useScales";
 import ButtonDelete from "../../../shared/components/Buttons/ButtonDelete";
 import Swal from "sweetalert2";

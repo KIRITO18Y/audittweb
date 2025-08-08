@@ -108,7 +108,7 @@ export const Home = () => {
             <h1 className="text-4xl sm:text-6xl lg:text-6xl mb-8 sm:mb-12 lg:mb-8 text-center lg:text-left">
                <span className="text-[#392F5A] font-bold">Bienvenido a
                </span>
-               <span className="text-[#392F5A]"> Medical</span>
+               <span className="text-[#392F5A]"> Medic</span>
                <span className="text-audittprimary font-bold">Audit</span>
             </h1>
 

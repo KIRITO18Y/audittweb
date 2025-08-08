@@ -15,6 +15,7 @@ export const useDataCuts = () => {
 	const queryDataCuts = useQuery({
 		queryKey: [KEY, client?.id],
 		queryFn: () => GetDataCuts(client?.id ?? 0),
+		enabled: !!client?.id,
 	});
 
 	const createDataCut = useMutation({

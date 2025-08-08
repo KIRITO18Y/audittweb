@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Option } from "../../shared/model";
 import { DataCutSelect } from "../DataCuts/DataCutsSelect"
 import { GuideSelect } from "../Guide/GuideSelect"
-import useUserContext from "../../shared/context/useUserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -14,7 +12,6 @@ import { ReportFunctionaries } from "./ReportFunctionaries";
 import { EmptyData } from "../../shared/components/Navigation/EmptyData";
 
 export const ReportContainer = () => {
-    const { client } = useUserContext();
     const [isEmptyClient, setIsEmptyClient] = useState(false);
     const REPORT_LIST = [
         {
@@ -30,10 +27,6 @@ Adherencia Estricta(Adherencia global o no estricta) y Por Criterio`,
         },
     ];
     const [selectedReport, setSelectedReport] = useState<number>(1);
-    const selectedClient: Option | undefined = {
-        value: client?.id?.toString(),
-        label: client?.name,
-    };
 
     if (isEmptyClient) {
         return <EmptyData message="No tienes clientes o instituciones asociadas o están inactivos por temas de licencia, contacta al administrador de la plataforma para obtener más información" />;
@@ -53,7 +46,7 @@ Adherencia Estricta(Adherencia global o no estricta) y Por Criterio`,
 
                     <div className="flex items-center space-x-4 mb-4">
                         <span className="font-medium">IPS</span>
-                        <ClientSelect xEmpty={() => setIsEmptyClient(true)} className="w-lg" selectedValue={selectedClient} isSearchable={true} />
+                        <ClientSelect xEmpty={() => setIsEmptyClient(true)} className="w-lg" isSearchable={true} />
                     </div>
                     <div className="flex items-center">
                         <Link to={'/Assessments/Create'} className="bg-[#392F5A] hover:bg-indigo-900 text-white px-6 py-2 rounded-lg font-semibold mb-2" >
