@@ -37,14 +37,7 @@ export const Home = () => {
 
                   {/* Video Mockup SVG */}
                   <div className="bg-gray-100 rounded-lg p-8 flex items-center justify-center">
-                     <svg width="200" height="120" viewBox="0 0 200 120" className="text-gray-400">
-                        <rect width="200" height="120" fill="currentColor" rx="8" />
-                        <circle cx="100" cy="60" r="20" fill="white" />
-                        <polygon points="92,50 92,70 108,60" fill="currentColor" />
-                        <text x="100" y="95" textAnchor="middle" className="text-xs fill-white">
-                           Tutorial Medical Audit
-                        </text>
-                     </svg>
+                     <iframe className="aspect-video" src="https://www.youtube.com/embed/cisFJleM_AI?si=r4D61DtTeULuKcWs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                   </div>
                </div>
             </div>
@@ -65,15 +58,8 @@ export const Home = () => {
                   <li>Acceso a datos de clientes e instituciones asociadas</li>
                </ul>
                {/* Video Mockup SVG */}
-               <div className="bg-gray-100 rounded-lg p-8 flex items-center justify-center mb-6">
-                  <svg width="200" height="120" viewBox="0 0 200 120" className="text-gray-400">
-                     <rect width="200" height="120" fill="currentColor" rx="8" />
-                     <circle cx="100" cy="60" r="20" fill="white" />
-                     <polygon points="92,50 92,70 108,60" fill="currentColor" />
-                     <text x="100" y="95" textAnchor="middle" className="text-xs fill-white">
-                        Tutorial Medical Audit
-                     </text>
-                  </svg>
+               <div className="bg-gray-100 rounded-lg p-8 flex items-center justify-center mb-6 ">
+                  <iframe className="aspect-video" src="https://www.youtube.com/embed/W4BxznIw7b0?si=r4D61DtTeULuKcWs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                </div>
 
                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
